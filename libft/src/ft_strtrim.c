@@ -1,24 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/06 19:11:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/11 15:14:35 by thcaquet         ###   ########.fr       */
+/*   Created: 2024/10/12 12:21:25 by thcaquet          #+#    #+#             */
+/*   Updated: 2025/09/11 14:51:56 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../libft.h"
 
-int	main(int ac, char **av)
+char	*ft_strtrim(char const *s1, char const *set)
 {
+	size_t	i;
+	size_t	j;
+	size_t	l;
 
-	t_data data;
-
-	if (ac != 2)
+	if (!s1 || !set)
 		return (0);
-	parsing(av[1], &data);
-
+	i = 0;
+	l = ft_strlen(s1);
+	while (s1[i++])
+	{
+		j = 0;
+		while (s1[i - 1] != set[j] && set[j])
+			j++;
+		if (!set[j])
+			break ;
+	}
+	while (s1[--l])
+	{
+		j = 0;
+		while (s1[l] != set[j] && set[j])
+			j++;
+		if (!set[j])
+			break ;
+	}
+	return (ft_substr(s1, i - 1, (l + 1) - (i - 1)));
 }

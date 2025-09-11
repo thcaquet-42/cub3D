@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/06 19:11:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/11 15:14:35 by thcaquet         ###   ########.fr       */
+/*   Created: 2024/10/13 14:52:31 by thcaquet          #+#    #+#             */
+/*   Updated: 2025/09/11 14:51:56 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../libft.h"
 
-int	main(int ac, char **av)
+void	ft_putnbr_fd(int n, int fd)
 {
+	char			c;
 
-	t_data data;
-
-	if (ac != 2)
-		return (0);
-	parsing(av[1], &data);
-
+	if (n == -2147483648)
+	{
+		write(fd, "-2147483648", 11);
+		return ;
+	}
+	if (n < 0)
+	{
+		n = -n;
+		write(fd, "-", 1);
+	}
+	if (n > 9)
+		ft_putnbr_fd((int) n / 10, fd);
+	c = n % 10 + '0';
+	write(fd, &c, 1);
 }

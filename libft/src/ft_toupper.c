@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/06 19:11:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/11 15:14:35 by thcaquet         ###   ########.fr       */
+/*   Created: 2024/10/10 13:23:13 by thcaquet          #+#    #+#             */
+/*   Updated: 2025/09/11 14:51:56 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../libft.h"
 
-int	main(int ac, char **av)
+int	ft_toupper(int c)
 {
-
-	t_data data;
-
-	if (ac != 2)
-		return (0);
-	parsing(av[1], &data);
-
+	if (c >= 'a' && c <= 'z')
+		c -= 32;
+	return (c);
 }

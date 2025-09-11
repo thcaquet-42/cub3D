@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_str_resize.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/06 19:11:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/11 15:14:35 by thcaquet         ###   ########.fr       */
+/*   Created: 2025/09/11 21:47:35 by thcaquet          #+#    #+#             */
+/*   Updated: 2025/09/11 22:07:05 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../libft.h"
 
-int	main(int ac, char **av)
+char	*ft_str_resize(char *str, int begin, int size)
 {
+	char	*new;
+	int		i;
 
-	t_data data;
-
-	if (ac != 2)
-		return (0);
-	parsing(av[1], &data);
-
+	if (size < 1 || begin > (int) ft_strlen(str))
+		return 0;
+	new = malloc(size + 1);
+	i = -1;
+	while (str && str[begin + ++i] && i < size)
+		new[i] = str[begin + i];
+	while (i <= size)
+	{
+		new[i] = 0;
+		++i;
+	}
+	free (str);
+	return (new);
 }

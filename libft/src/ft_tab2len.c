@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_tab2len.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/06 19:11:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/11 15:14:35 by thcaquet         ###   ########.fr       */
+/*   Created: 2025/04/21 20:05:38 by thcaquet          #+#    #+#             */
+/*   Updated: 2025/04/29 08:56:36 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
-
-int	main(int ac, char **av)
+int	ft_tab2len(char **tab)
 {
+	int	i;
 
-	t_data data;
-
-	if (ac != 2)
-		return (0);
-	parsing(av[1], &data);
-
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }

@@ -1,24 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/06 19:11:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/11 15:14:35 by thcaquet         ###   ########.fr       */
+/*   Created: 2024/10/12 12:00:54 by thcaquet          #+#    #+#             */
+/*   Updated: 2025/09/11 14:51:56 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../libft.h"
 
-int	main(int ac, char **av)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
+	int		ls1;
+	int		ls2;
+	int		i;
+	char	*str;
 
-	t_data data;
-
-	if (ac != 2)
+	ls1 = 0;
+	ls2 = 0;
+	if (s1)
+		ls1 = ft_strlen(s1);
+	if (s2)
+		ls2 = ft_strlen(s2);
+	i = -1;
+	str = (char *) malloc(ls1 + ls2 + 1);
+	if (!str)
 		return (0);
-	parsing(av[1], &data);
-
+	while (++i < ls1)
+		str[i] = s1[i];
+	i--;
+	while ((++i - ls1) < ls2)
+		str[i] = s2[i - ls1];
+	str[i] = 0;
+	return (str);
 }

@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/06 19:11:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/11 15:14:35 by thcaquet         ###   ########.fr       */
+/*   Created: 2024/10/10 13:24:42 by thcaquet          #+#    #+#             */
+/*   Updated: 2025/09/11 14:51:56 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../libft.h"
 
-int	main(int ac, char **av)
+char	*ft_strchr(const char *s, int c)
 {
+	int		i;
+	char	r;
 
-	t_data data;
-
-	if (ac != 2)
-		return (0);
-	parsing(av[1], &data);
-
+	r = (char) c;
+	i = 0;
+	if (r == 0)
+		return ((char *)(s + ft_strlen((char *)s)));
+	while (*(char *)(s + i))
+	{
+		if (*(char *)(s + i) == r)
+			return ((char *)(s + i));
+		i++;
+	}
+	return (0);
 }

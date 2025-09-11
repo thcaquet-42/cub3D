@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_n_realloc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/06 19:11:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/11 15:14:35 by thcaquet         ###   ########.fr       */
+/*   Created: 2025/04/24 19:26:36 by thcaquet          #+#    #+#             */
+/*   Updated: 2025/09/11 14:51:56 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../libft.h"
 
-int	main(int ac, char **av)
+char	*ft_n_realloc(char *str, int len)
 {
+	char	*new;
+	int		i;
 
-	t_data data;
-
-	if (ac != 2)
+	i = -1;
+	new = malloc(len + 1);
+	if (!new)
 		return (0);
-	parsing(av[1], &data);
-
+	while (str[++i] && i < len)
+		new[i] = str[i];
+	while (i <= len)
+		new[i++] = 0;
+	if (str)
+		free(str);
+	return (new);
 }

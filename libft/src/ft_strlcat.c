@@ -1,24 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/06 19:11:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/11 15:14:35 by thcaquet         ###   ########.fr       */
+/*   Created: 2024/08/20 13:59:20 by thcaquet          #+#    #+#             */
+/*   Updated: 2025/09/11 14:51:56 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../libft.h"
 
-int	main(int ac, char **av)
+size_t	ft_strlcat(char *dest, char *src, size_t size)
 {
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	l;
 
-	t_data data;
-
-	if (ac != 2)
+	if (!dest && !*src)
 		return (0);
-	parsing(av[1], &data);
-
+	if (!dest && !size)
+		return (ft_strlen(src));
+	l = ft_strlen(dest);
+	i = 0;
+	j = 0;
+	while (dest[i])
+		i++;
+	while (src[j] && i + 1 < size)
+	{
+		dest[i] = src[j];
+		i++;
+		j++;
+	}
+	dest[i] = '\0';
+	if (i > size)
+		return (ft_strlen(src) + size);
+	return (ft_strlen(src) + l);
 }
