@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set.c                                              :+:      :+:    :+:   */
+/*   short_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 17:26:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/12 17:30:37 by thcaquet         ###   ########.fr       */
+/*   Created: 2025/09/12 20:58:34 by thcaquet          #+#    #+#             */
+/*   Updated: 2025/09/12 21:53:22 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	set_data(t_data *data)
+int	check_case_map(int c)
 {
-	data->tex[EA] = 0;
-	data->tex[NO] = 0;
-	data->tex[SO] = 0;
-	data->tex[WE] = 0;
-	data->rgb[F].r = -1;
-	data->rgb[C].r = -1;
-	data->map = 0;
+	return (c != ' ' && c != '0' && c != '1' && c != 'N' && c != 'S'
+			&& c != 'E' && c != 'W' && c != '\n');
 }

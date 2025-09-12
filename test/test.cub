@@ -1,0 +1,19 @@
+NO test/tach.png
+SO test/tach.png
+EA test/tach.png
+WE test/tach.png
+
+C 4,02,10                                      
+F           0,0000000255,1                                     
+
+
+     000 11 000
+     000 11 000NSWE
+     000 11 000
+     000 11 000
+     000 11 0000000000000000
+     000 11 000
+     000 11 000                            
+
+
+

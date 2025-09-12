@@ -16,18 +16,24 @@
 // a voir si ca reste ou pas
 
 #include "parsing.h"
-// #include "mlx/MLX42.h"
+#include "MLX42/include/MLX42/MLX42.h"
 
 #define TRUE 1
 #define FALSE 0
+#define NO 0
+#define SO 1
+#define WE 2
+#define EA 3
+#define F 0
+#define C 1
 
-typedef struct s_path // une struct temporaire, elle vas bientot etre modifier
+
+typedef struct s_color
 {
-	int	NO;
-	int	SO;
-	int	WE;
-	int	EA;
-}t_path;
+    int r;
+    int g;
+    int b;
+}   t_color;
 
 typedef struct s_point
 {
@@ -50,24 +56,27 @@ typedef struct s_vec
 typedef struct s_data
 {
 	// mlx_t		*mlx;
-	t_vec		player;
-	t_point		cam;
-	t_int_point	map_size;
-	char		**map;
-	int			scrn_x;
-	int			scrn_y;
+	t_vec			player;
+	t_point			cam;
+	t_int_point		map_size;
+	char			**map;
+	int				scrn_x;
+	int				scrn_y;
 
 	// mes ajout ================
-	t_path	tex;
-	int		F[3];
-	int		C[3];
+	mlx_texture_t	*tex[4];
+	t_color			rgb[2];
 }t_data;
 
 
 // tools 
 
-void	tool_exit(int nb_exit, char *str, t_data *data, void *thing);
+void		tool_exit(int nb_exit, char *str, t_data *data, void *thing);
+uint32_t	tool_rgba(int r, int g, int b, int a);
 
+// check
+
+int			check_case_map(int c);
 
 // function
 

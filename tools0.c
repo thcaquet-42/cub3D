@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 17:34:10 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/11 20:48:59 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/09/12 20:58:11 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,27 @@ void	tool_exit(int nb_exit, char *str, t_data *data, void *thing)
 
 	if (!data)
 		exit(nb_exit);
-	// if (data->t.NO)
-	// 	free(data->t.NO);
-	// if (data->t.SO)
-	// 	free(data->t.SO);
-	// if (data->t.WE)
-	// 	free(data->t.WE);
-	// if (data->t.EA)
-	// 	free(data->t.EA);
+
+	printf("F -> %d, %d, %d\n", data->rgb[F].r, data->rgb[F].g, data->rgb[F].b); // tmp
+	printf("C -> %d, %d, %d\n", data->rgb[C].r, data->rgb[C].g, data->rgb[C].b); // tmp
+	
+	if (data->tex[NO])
+		mlx_delete_texture(data->tex[NO]);
+	if (data->tex[SO])
+		mlx_delete_texture(data->tex[SO]);
+	if (data->tex[WE])
+		mlx_delete_texture(data->tex[WE]);
+	if (data->tex[EA])
+		mlx_delete_texture(data->tex[EA]);
 	if (thing)
 		free(thing);
 	if (data->map)
 		free_tab(data->map);
 	exit(nb_exit);
 }
+
+uint32_t	tool_rgba(int r, int g, int b, int a)
+{
+    return (r << 24 | g << 16 | b << 8 | a);
+}
+

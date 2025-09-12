@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set.c                                              :+:      :+:    :+:   */
+/*   ft_strcount.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 17:26:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/12 17:30:37 by thcaquet         ###   ########.fr       */
+/*   Created: 2025/09/12 18:57:47 by thcaquet          #+#    #+#             */
+/*   Updated: 2025/09/12 19:07:52 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../libft.h"
 
-void	set_data(t_data *data)
+size_t	ft_strcount(const char *str, int c)
 {
-	data->tex[EA] = 0;
-	data->tex[NO] = 0;
-	data->tex[SO] = 0;
-	data->tex[WE] = 0;
-	data->rgb[F].r = -1;
-	data->rgb[C].r = -1;
-	data->map = 0;
+	size_t	i;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i] && str[i] == c)
+		i++;
+	return (i);
 }

@@ -4,6 +4,9 @@ SRC			= 	main.c	\
 				parsing.c \
 				set.c \
 				tools0.c \
+				load.c \
+				short_check.c \
+				lst.c \
 
 				
 OBJ			= $(SRC:.c=.o)
@@ -14,10 +17,14 @@ LIB			= $(LIB_PATH)/libft.a
 CFLAGS		= -Werror -Wextra -Wall -g
 LDFLAGS		= -I $(LIB_PATH)/ 
 
+MLX_DIR 	= MLX42
+MLX_LIB 	= $(MLX_DIR)/build/libmlx42.a
+
+
 all: $(LIB) $(NAME)
 
 $(NAME): $(OBJ)
-	cc $(CFLAGS) $(OBJ) $(LIB) -l readline -o $(NAME)
+	cc $(CFLAGS) $(OBJ) $(LIB) $(MLX_LIB) -lglfw -o $(NAME)
 
 $(LIB):
 	make -sC $(LIB_PATH)
@@ -31,8 +38,18 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -rf $(MLX_DIR)
 	make -sC $(LIB_PATH) fclean
 
-re: fclean all
+re: fclean mlx all
 
-.PHONY: all clean fclean re 
+mlx:
+	@if [ ! -d "$(MLX_DIR)" ]; then \
+		git clone https://github.com/codam-coding-college/MLX42.git $(MLX_DIR); \
+	else \
+		echo "$(MLX_DIR) already exists"; \
+	fi
+	@echo "Building MLX42..."
+	@cd $(MLX_DIR) && mkdir -p build && cd build && cmake .. && make
+
+.PHONY: all clean fclean re mlx

@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:01:59 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/11 22:07:12 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/09/12 18:59:45 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int			ft_isascii(int c);
 int			ft_isprint(int c);
 int			ft_tab2len(char **tab);
 size_t		ft_strlen(const char *str);
+size_t		ft_strcount(const char *str, int c);
 void		*ft_memset(void *s, int c, size_t n);
 void		*ft_bzero(void *s, size_t n);
 void		*ft_memcpy(void *dest, const void *src, size_t n);

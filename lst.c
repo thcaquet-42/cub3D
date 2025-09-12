@@ -1,27 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lst.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/06 19:11:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/12 17:22:43 by thcaquet         ###   ########.fr       */
+/*   Created: 2025/04/21 19:04:05 by thcaquet          #+#    #+#             */
+/*   Updated: 2025/09/12 22:10:05 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	main(int ac, char **av)
+void	lst_add_back(t_tail *tail, char *content)
 {
+	t_lst	*new;
 
-	t_data data;
+	new = malloc(sizeof(t_lst));
+	if (!new)
+		return ;
+	new->str = ft_strdup((const char *) content);
+	if (!new->str)
+		return ;
+	if (!tail->start)
+		tail->start = new;
+	new->next = 0;
+	if (tail->end)
+		tail->end->next = new;
+	tail->end = new;
+	tail->y += 1;
+}
 
-	if (ac != 2)
-		tool_exit(1, ERROR_ARG, 0, 0);
-	parsing(av[1], &data);
-	printf("F -> %d, %d, %d\n", data.rgb[F].r, data.rgb[F].g, data.rgb[F].b);
-	printf("C -> %d, %d, %d\n", data.rgb[C].r, data.rgb[C].g, data.rgb[C].b);
+t_tail	lst_set()
+{
+	t_tail tail;
 
+	tail.start = 0;
+	tail.end = 0;
+	tail.x = 0;
+	tail.y = 0;
 
+	return (tail);
 }
