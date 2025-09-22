@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set.c                                              :+:      :+:    :+:   */
+/*   vec.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emrocher <emrocher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 17:26:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/22 18:35:42 by emrocher         ###   ########.fr       */
+/*   Created: 2025/09/22 17:33:27 by emrocher          #+#    #+#             */
+/*   Updated: 2025/09/22 18:16:47 by emrocher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-void	set_data(t_data *data)
+t_point new_point(double x, double y)
 {
-	data->tex[EA] = 0;
-	data->tex[NO] = 0;
-	data->tex[SO] = 0;
-	data->tex[WE] = 0;
-	data->rgb[F].r = -1;
-	data->rgb[C].r = -1;
-	data->map = 0;
+    t_point new_point;
 
-	data->scrn_x = 1920;
-	data->scrn_y = 1080;
-
-	data->lst_map = lst_set();
+    new_point.x = x;
+    new_point.y = y;
+    return(new_point);
 }

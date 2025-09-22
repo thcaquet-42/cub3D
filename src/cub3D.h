@@ -30,10 +30,10 @@
 
 typedef struct s_color
 {
-    int r;
-    int g;
-    int b;
-}   t_color;
+	int r;
+	int g;
+	int b;
+}t_color;
 
 typedef struct s_point
 {
@@ -59,6 +59,14 @@ typedef struct s_lst
 	char			*str;
 }	t_lst;
 
+typedef struct s_arrow
+{
+	t_point front;
+	t_point back;
+	t_point side;
+	t_point sym;
+}t_arrow;
+
 typedef struct s_tail
 {
 	struct s_lst	*start;
@@ -70,7 +78,8 @@ typedef struct s_tail
 
 typedef struct s_data
 {
-	// mlx_t		*mlx;
+	mlx_t		*mlx;
+	mlx_image_t *minimap;
 	t_vec			player;
 	t_point			cam;
 	t_int_point		map_size;
@@ -105,7 +114,20 @@ int			check_case_map(int c);
 int			check_is_spawn(int c);
 int			check_is_walkable(int c);
 
+// =============================================
+
+// vec
+t_point new_point(x, y);
+
+// loop
+void game_loop(arg);
+
+// draw
+void draw_map(data);
+
+// img
+void    pxl_put(img, x, y, color);
+
 // function
 
 #endif
-

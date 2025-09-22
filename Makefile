@@ -1,6 +1,7 @@
 NAME		= cub3D
 
 SRC			= 	src/main.c	\
+				src/hooks.c \
 				\
 				\
 				src/parsing/parsing_map.c \
@@ -13,6 +14,16 @@ SRC			= 	src/main.c	\
 				src/tools/short_check.c \
 				src/tools/lst.c \
 				src/tools/clear.c \
+				\
+				\
+				src/rendering/draw.c \
+				src/rendering/img.c \
+				src/rendering/loop.c \
+				src/rendering/vec.c \
+				\
+				\
+
+
 
 				
 OBJ			= $(SRC:.c=.o)
