@@ -27,6 +27,9 @@
 #define F 0
 #define C 1
 
+#define MAP_X 200
+#define MAP_Y 200
+
 
 typedef struct s_color
 {
@@ -41,12 +44,6 @@ typedef struct s_point
 	double	y;
 }t_point;
 
-typedef struct s_int_point
-{
-	int	x;
-	int	y;
-}t_int_point;
-
 typedef struct s_vec
 {
 	t_point	pos;
@@ -56,7 +53,7 @@ typedef struct s_vec
 typedef struct s_lst
 {
 	struct s_lst	*next;
-	char			*str;
+	char		*str;
 }	t_lst;
 
 typedef struct s_arrow
@@ -82,7 +79,6 @@ typedef struct s_data
 	mlx_image_t *minimap;
 	t_vec			player;
 	t_point			cam;
-	t_int_point		map_size;
 	char			**map;
 	int				scrn_x;
 	int				scrn_y;
@@ -117,17 +113,13 @@ int			check_is_walkable(int c);
 // =============================================
 
 // vec
-t_point new_point(x, y);
+t_point new_point(double x, double y);
 
 // loop
-void game_loop(arg);
+void game_loop(void *arg);
 
 // draw
-void draw_map(data);
-
-// img
-void    pxl_put(img, x, y, color);
-
+void draw_map(t_data *data);
 // function
 
 #endif

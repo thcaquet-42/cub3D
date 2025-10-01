@@ -6,11 +6,11 @@
 /*   By: emrocher <emrocher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:33:22 by emrocher          #+#    #+#             */
-/*   Updated: 2025/09/22 18:16:47 by emrocher         ###   ########.fr       */
+/*   Updated: 2025/10/01 16:01:26 by emrocher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3D.h"
+// #include "../cub3D.h"
 
-key_hooks(t_main *main)
-{}
+// key_hooks(t_main *main)
+// {}
