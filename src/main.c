@@ -6,7 +6,7 @@
 /*   By: emrocher <emrocher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 19:11:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/01 17:36:01 by emrocher         ###   ########.fr       */
+/*   Updated: 2025/10/01 18:32:41 by emrocher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_all(t_data *data, char **av)
 	// tmp
  	data->mlx = mlx_init(data->scrn_x, data->scrn_y, "minimap", true);
 	
-	data->minimap = mlx_new_image(data->mlx, MAP_X, MAP_Y);
+	data->minimap = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(data->mlx, data->minimap, 10 , 10);
 }
 

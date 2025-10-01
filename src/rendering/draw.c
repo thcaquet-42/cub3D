@@ -6,7 +6,7 @@
 /*   By: emrocher <emrocher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:04:08 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/01 18:12:12 by emrocher         ###   ########.fr       */
+/*   Updated: 2025/10/01 18:38:09 by emrocher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static void	check_pxl_map(t_data *data, int x, int y)
 {
-	if (data->map[y * data->lst_map.y / 200][x * data->lst_map.x / 200] == '1')
+	if (data->map[y * data->lst_map.y / MAP_Y][x * data->lst_map.x / MAP_X] == '1')
 	{
-		mlx_put_pixel(data->minimap, x, y, 0xFF3b3939); // 0xFF3b3939
+		mlx_put_pixel(data->minimap, WIDTH - 20 - MAP_X + x, y, tool_rgba(10, 10, 10, 255));
 	}
-	else if(check_is_walkable(data->map[y * data->lst_map.y / 200][x * data->lst_map.x / 200])) 
-		mlx_put_pixel(data->minimap, x, y, 0xFFc2c2c2); // 0xFFc2c2c2
+	else if(check_is_walkable(data->map[y * data->lst_map.y / MAP_Y][x * data->lst_map.x / MAP_X])) 
+		mlx_put_pixel(data->minimap, WIDTH - 20 - MAP_X + x, y,  tool_rgba(50, 50, 100, 255));
 }
 
 void draw_map(t_data *data)
@@ -28,10 +28,10 @@ void draw_map(t_data *data)
     uint32_t y;
 
     y = 0;
-    while (y < 200)
+    while (y < MAP_Y)
     {
         x = 0;
-        while (x < 200)
+        while (x < MAP_X)
         {
             check_pxl_map(data, x, y);
             x++;

@@ -30,6 +30,12 @@
 #define MAP_X 200
 #define MAP_Y 200
 
+#define WIDTH 1920
+#define HEIGHT 1080
+
+
+
+
 
 typedef struct s_color
 {

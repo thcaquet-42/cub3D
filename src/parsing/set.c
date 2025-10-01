@@ -6,7 +6,7 @@
 /*   By: emrocher <emrocher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 17:26:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/01 17:26:47 by emrocher         ###   ########.fr       */
+/*   Updated: 2025/10/01 18:31:01 by emrocher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	set_data(t_data *data)
 	data->rgb[C].r = -1;
 	data->map = 0;
 
-	data->scrn_x = 1920;
-	data->scrn_y = 1080;
+	data->scrn_x = WIDTH;
+	data->scrn_y = HEIGHT;
 
 	data->lst_map = lst_set();
 }
