@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emrocher <emrocher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/06 19:11:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/01 19:07:51 by emrocher         ###   ########.fr       */
+/*   Created: 2025/10/01 19:14:30 by emrocher          #+#    #+#             */
+/*   Updated: 2025/10/01 19:42:57 by emrocher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 
 
-void	get_player_pos(t_data *data, char **map)
+float	get_player_pos(t_data *data, char **map)
 {
 	int i = 0;
 	while(map[i])
@@ -22,23 +22,27 @@ void	get_player_pos(t_data *data, char **map)
 		int j = 0;
 		while(map[i][j])
 		{
-			if(map[i][j] == 'N' || map[i][j] == 'W' || map[i][j] == 'E' || map[i][j] == 'S' )
-			{
-				data->player.pos.y = i;
-				data->player.pos.x = j;
-				printf("player pos : %f, %f", data->player.pos.x, data->player.pos.y);
-				return ;
-			}
+			data->player.pos.y = i;
+			data->player.pos.x = j;
+			if(map[i][j] == 'N')
+				return (0);
+			else if (map[i][j] == 'E')
+				return (90);
+			else if (map[i][j] == 'S')
+				return (180);
+			else if (map[i][j] == 'W')
+				return (270);
 			j++;
 		}
 		i++;
 	}
+	return (0);
 }
 
 void	init_player(t_data *data, char **map)
 {
-	get_player_pos(data, map);
-	
+	data->player.dir = get_player_pos(data, map);
+	printf("player pos : %f, %f -> %f", data->player.pos.x, data->player.pos.y, data->player.dir);
 }
 
 
@@ -63,6 +67,7 @@ int	main(int ac, char **av)
 
 	init_all(&data, av);
 	mlx_loop_hook(data.mlx, game_loop, &data);
+	mlx_key_hook(data.mlx, ft_key_hook, &data);
 	mlx_loop(data.mlx);
 
 	// y a plus qu a ecrire le reste du code ici
