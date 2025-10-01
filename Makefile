@@ -17,7 +17,6 @@ SRC			= 	src/main.c	\
 				\
 				\
 				src/rendering/draw.c \
-				src/rendering/img.c \
 				src/rendering/loop.c \
 				src/rendering/vec.c \
 				\
