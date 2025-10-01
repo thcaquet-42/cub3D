@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emrocher <emrocher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 19:11:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/01 18:32:41 by emrocher         ###   ########.fr       */
+/*   Updated: 2025/10/01 18:54:57 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	main(int ac, char **av)
 
 	init_all(&data, av);
 	mlx_loop_hook(data.mlx, game_loop, &data);
+	mlx_key_hook(data.mlx, ft_key_hook, &data);
 	mlx_loop(data.mlx);
 
 	// y a plus qu a ecrire le reste du code ici

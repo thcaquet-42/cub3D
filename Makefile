@@ -21,6 +21,9 @@ SRC			= 	src/main.c	\
 				src/rendering/vec.c \
 				\
 				\
+				src/key/key.c\
+				\
+				\
 
 
 

@@ -116,6 +116,9 @@ int			check_case_map(int c);
 int			check_is_spawn(int c);
 int			check_is_walkable(int c);
 
+// key
+void	ft_key_hook(mlx_key_data_t d_k, void *data);
+
 // =============================================
 
 // vec
