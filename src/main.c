@@ -6,7 +6,7 @@
 /*   By: emrocher <emrocher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 19:11:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/01 18:32:41 by emrocher         ###   ########.fr       */
+/*   Updated: 2025/10/01 19:07:51 by emrocher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,40 @@
 
 
 
-// static char	get_player_pos(t_data *data, char **map)
-// {
+void	get_player_pos(t_data *data, char **map)
+{
+	int i = 0;
+	while(map[i])
+	{
+		int j = 0;
+		while(map[i][j])
+		{
+			if(map[i][j] == 'N' || map[i][j] == 'W' || map[i][j] == 'E' || map[i][j] == 'S' )
+			{
+				data->player.pos.y = i;
+				data->player.pos.x = j;
+				printf("player pos : %f, %f", data->player.pos.x, data->player.pos.y);
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
 
-// }
+void	init_player(t_data *data, char **map)
+{
+	get_player_pos(data, map);
+	
+}
 
-// static void	init_player(t_data *data, char **map)
-// {
-// }
 
 void	init_all(t_data *data, char **av)
 {
 	parsing(av[1], data);
 	data->lst_map.x = data->lst_map.x - data->lst_map.min;
-	(void) av;
-	printf("scrn_x = %d, scrn_y = %d\n", data->scrn_x, data->scrn_y); // test ==========================
-	
-	int	i = -1;
-	while(data->map[++i])
-	{
-		printf("map[%d] = %s\n", i, data->map[i]);
-	}
-	printf("x_max = %zu, Y_max = %zu\n", data->lst_map.x, data->lst_map.y);
-	printf("end\n");
-
-	// tmp
  	data->mlx = mlx_init(data->scrn_x, data->scrn_y, "minimap", true);
+	init_player(data, data->map);
 	
 	data->minimap = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(data->mlx, data->minimap, 10 , 10);
