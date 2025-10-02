@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdlib.h>
+#include <math.h>
+
 
 #include "libft/libft.h"
 
@@ -12,11 +14,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/time.h>
+#include <X11/Xutil.h>
 
 // a voir si ca reste ou pas
 
 #include "parsing/parsing.h"
-#include "../MLX42/include/MLX42/MLX42.h"
+#include "../minilibx-linux/mlx.h"
 
 #define TRUE 1
 #define FALSE 0
@@ -33,8 +36,26 @@
 #define WIDTH 1920
 #define HEIGHT 1080
 
+#define BKEY_W 1
+#define BKEY_A 2
+#define BKEY_S 4
+#define BKEY_D 8
+#define BKEY_LEFT  16
+#define BKEY_RIGHT 32
 
+#define KEY_W 119
+#define KEY_A 97
+#define KEY_S 115
+#define KEY_D 100
+#define KEY_ESC 65307
+#define KEY_LEFT  65361
+#define KEY_RIGHT 65363
 
+#define PI 3.141592654
+#define PI4 0.785398163
+#define PI8 0.392699082
+#define PI16 0.196349541
+#define PI32 0.09817477
 
 
 typedef struct s_color
@@ -53,7 +74,7 @@ typedef struct s_point
 typedef struct s_vec
 {
 	t_point	pos;
-	float	dir;
+	double	dir;
 }t_vec;
 
 typedef struct s_lst
@@ -79,21 +100,35 @@ typedef struct s_tail
 	size_t			y;
 }	t_tail;
 
+
+typedef struct s_tex
+{
+	void		*img;
+	uint32_t	*buf;
+	int			width;
+	int			height;
+	int			size_w;	
+
+} t_tex;
+
 typedef struct s_data
 {
-	mlx_t		*mlx;
-	mlx_image_t *minimap;
-	t_vec			player;
-	t_point			cam;
-	char			**map;
-	int				scrn_x;
-	int				scrn_y;
+	void		*mlx;
+	void		*win;
+	void 		*img;
+	uint32_t 	*buf;
+	t_vec		player;
+	t_point		cam;
+	char		**map;
+	int			scrn_x;
+	int			scrn_y;
 
 	// mes ajout ================
-	mlx_texture_t	*tex[4];
+	t_tex			tex[4];
 	t_color			rgb[2];
 	t_tail			lst_map;
 	int				fd;
+	int				keys;
 }t_data;
 
 
@@ -117,7 +152,10 @@ int			check_is_spawn(int c);
 int			check_is_walkable(int c);
 
 // key
-void	ft_key_hook(mlx_key_data_t d_k, void *data);
+int		key_hook_press(int key, void *v_data);
+int		key_hook_release(int key, void *v_data);
+void	key_hook(t_data *data);
+
 
 // =============================================
 
@@ -125,10 +163,11 @@ void	ft_key_hook(mlx_key_data_t d_k, void *data);
 t_point new_point(double x, double y);
 
 // loop
-void game_loop(void *arg);
+int game_loop(void *arg);
 
 // draw
 void draw_map(t_data *data);
+void draw_player(t_data *data);
 // function
 
 #endif

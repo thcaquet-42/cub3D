@@ -3,35 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emrocher <emrocher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:14:30 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/01 19:42:57 by emrocher         ###   ########.fr       */
+/*   Updated: 2025/10/02 06:27:48 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
 
-
-float	get_player_pos(t_data *data, char **map)
+float	init_player_pos(t_data *data)
 {
 	int i = 0;
-	while(map[i])
+	while(data->map[i])
 	{
 		int j = 0;
-		while(map[i][j])
+		while(data->map[i][j])
 		{
-			data->player.pos.y = i;
-			data->player.pos.x = j;
-			if(map[i][j] == 'N')
+			data->player.pos.y = i + 0.5;
+			data->player.pos.x = j + 0.5;
+			if(data->map[i][j] == 'N')
 				return (0);
-			else if (map[i][j] == 'E')
-				return (90);
-			else if (map[i][j] == 'S')
-				return (180);
-			else if (map[i][j] == 'W')
-				return (270);
+			else if (data->map[i][j] == 'E')
+				return (PI4);
+			else if (data->map[i][j] == 'S')
+				return (PI4 * 2);
+			else if (data->map[i][j] == 'W')
+				return (PI4 * 3);
 			j++;
 		}
 		i++;
@@ -39,36 +38,41 @@ float	get_player_pos(t_data *data, char **map)
 	return (0);
 }
 
-void	init_player(t_data *data, char **map)
-{
-	data->player.dir = get_player_pos(data, map);
-	printf("player pos : %f, %f -> %f", data->player.pos.x, data->player.pos.y, data->player.dir);
-}
-
-
 void	init_all(t_data *data, char **av)
 {
-	parsing(av[1], data);
-	data->lst_map.x = data->lst_map.x - data->lst_map.min;
- 	data->mlx = mlx_init(data->scrn_x, data->scrn_y, "minimap", true);
-	init_player(data, data->map);
+	int	nul;
+
+	data->mlx = mlx_init();
 	
-	data->minimap = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	mlx_image_to_window(data->mlx, data->minimap, 10 , 10);
+	
+	parsing(av[1], data);
+	data->player.dir = init_player_pos(data);
+	data->lst_map.x = data->lst_map.x - data->lst_map.min;
+	
+	data->win = mlx_new_window(data->mlx, data->scrn_x, data->scrn_y, "CUB3D");
+	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	data->buf = (uint32_t *) mlx_get_data_addr(data->img, &nul, &nul, &nul);
 }
 
-
+#define MACRO 8
 int	main(int ac, char **av)
 {
 	t_data data;
-
+	
+	data = (t_data){0};
 	if (ac != 2)
-		clear_exit(1, ERROR_ARG, 0, 0);
-
+	clear_exit(1, ERROR_ARG, 0, 0);
+	
 	init_all(&data, av);
 	mlx_loop_hook(data.mlx, game_loop, &data);
-	mlx_key_hook(data.mlx, ft_key_hook, &data);
+	mlx_hook(data.win, KeyPress, KeyPressMask, key_hook_press, &data);
+	mlx_hook(data.win, KeyRelease, KeyReleaseMask, key_hook_release, &data);
 	mlx_loop(data.mlx);
+	// uint16_t inputs = 0;
+	// inputs = 1 << 3;
+	// int a = inputs & MACRO;
+	// inputs = inputs | MACRO;
+	// inputs = inputs & ~MACRO;
 
 	// y a plus qu a ecrire le reste du code ici
 

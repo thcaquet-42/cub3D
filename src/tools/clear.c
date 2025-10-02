@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 16:06:15 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/15 21:44:05 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/02 07:54:06 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,28 @@ t_lst	*clear_lst(t_data *data)
 
 void	clear_data(t_data *data)
 {
+	int	i;
+
 	if (!data)
 		return;
 	
 	clear_lst(data);
-	if (data->tex[NO])
-		mlx_delete_texture(data->tex[NO]);
-	if (data->tex[SO])
-		mlx_delete_texture(data->tex[SO]);
-	if (data->tex[WE])
-		mlx_delete_texture(data->tex[WE]);
-	if (data->tex[EA])
-		mlx_delete_texture(data->tex[EA]);
+	i = -1;
+	while (++i < 4)
+	{
+		if (data->tex[i].img)
+		{
+			mlx_destroy_image(data->mlx, data->tex[i].img);
+			data->tex[i].img = NULL;
+		}
+	}
+	if (data->win)
+		mlx_destroy_window(data->mlx, data->win);
+	if (data->img)
+		mlx_destroy_image(data->mlx, data->img);
+	if (data->mlx)
+		mlx_destroy_display(data->mlx);
+	free(data->mlx);
 	if (data->fd > 0)
 		close(data->fd);
 	if (data->map)

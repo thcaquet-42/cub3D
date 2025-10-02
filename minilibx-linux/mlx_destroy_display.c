@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools0.c                                           :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 17:34:10 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/02 07:26:15 by thcaquet         ###   ########.fr       */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3D.h"
+#include "mlx_int.h"
 
-uint32_t	tool_rgba(int r, int g, int b, int a)
+int	mlx_destroy_display(t_xvar *xvar)
 {
-    return (a << 24 | r << 16 | g << 8 | b);
+	XCloseDisplay(xvar->display);
 }
-

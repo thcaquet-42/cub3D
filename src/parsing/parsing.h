@@ -14,8 +14,6 @@
 
 #define ERROR_MALLOC "ERROR MALLOC\n"
 
-
-
 typedef struct s_data t_data;
 
 void	parsing(const char *path, t_data *data);

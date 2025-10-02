@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 20:38:43 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/15 21:43:24 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/02 06:11:20 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,27 @@ void	load_colors(char *line, int i, t_data *data, int color)
 		clear_exit(1, "(3)" ERROR_RGB, data, line);
 }
 
-void	load_tex(char *line, int len, t_data *data, int cardinal)
+void	load_tex(char *line, int len, t_data *data, int dir)
 {
 	char	*tmp;
 	int		i;
+	int		null;
 
 	i = 3;
 	while (line[i] == ' ')
 		++i;
-	if (data->tex[cardinal] == 0)
+	if (data->tex[dir].img == 0)
 	{
 		tmp = ft_strndup(&line[i], len - (1 + i));
-		data->tex[cardinal] = mlx_load_png(tmp);
+		data->tex[dir].img = mlx_xpm_file_to_image(data->mlx, \
+			tmp, &data->tex[dir].width, &data->tex[dir].height);
+		data->tex[dir].buf =(uint32_t *) mlx_get_data_addr(data->tex[dir].img, &null, \
+			&data->tex[dir].size_w, &null);
+		data->tex[dir].size_w /= sizeof(data->tex[dir].size_w);
 		free(tmp);
 	}
 	else
 		clear_exit(1, ERROR_MULTI_TEX, data, line);
-	if (data->tex[cardinal] == 0)
+	if (data->tex[dir].img == 0)
 		clear_exit(1, ERROR_LOAD_TEX, data, line);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emrocher <emrocher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 19:11:41 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/01 16:53:34 by emrocher         ###   ########.fr       */
+/*   Updated: 2025/10/02 05:51:45 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int		chek_path(char *line, int len, t_data *data)
 
 void	ensure_preloading_map(t_data *data)
 {
-	if (!data->tex[NO])
+	if (!data->tex[NO].buf)
 		clear_exit(1, "(4)" ERROR_LOAD_TEX, data, 0);
-	if (!data->tex[SO])
+	if (!data->tex[SO].buf)
 		clear_exit(1, "(4)" ERROR_LOAD_TEX, data, 0);
-	if (!data->tex[WE])
+	if (!data->tex[WE].buf)
 		clear_exit(1, "(4)" ERROR_LOAD_TEX, data, 0);
-	if (!data->tex[EA])
+	if (!data->tex[EA].buf)
 		clear_exit(1, "(4)" ERROR_LOAD_TEX, data, 0);
 	if (data->rgb[F].r == -1)
 		clear_exit(1, "(4)" ERROR_RGB, data, 0);
