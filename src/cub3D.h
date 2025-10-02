@@ -155,7 +155,7 @@ int			check_is_walkable(int c);
 int		key_hook_press(int key, void *v_data);
 int		key_hook_release(int key, void *v_data);
 void	key_hook(t_data *data);
-
+int		close_window(t_data *data);
 
 // =============================================
 

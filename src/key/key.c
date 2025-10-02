@@ -6,11 +6,18 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:51:03 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/02 07:54:53 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/02 08:16:50 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
+
+int close_window(t_data *data)
+{
+	mlx_loop_end(data->mlx);
+	return (0);
+}
+
 
 void	check_edge(t_data *data, double in_x, double in_y)
 {
@@ -48,10 +55,7 @@ int	key_hook_press(int key, void *v_data)
 	
 	data = v_data;
 	if (key == KEY_ESC)
-	{
-		mlx_destroy_window(data->mlx, data->win);
-		mlx_loop_end(data->mlx);
-	}
+		close_window(data);
 	if (key == KEY_W)
 		data->keys = data->keys | BKEY_W;
 	if (key == KEY_S)

@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:14:30 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/02 06:27:48 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/02 08:19:34 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,8 @@ int	main(int ac, char **av)
 	mlx_loop_hook(data.mlx, game_loop, &data);
 	mlx_hook(data.win, KeyPress, KeyPressMask, key_hook_press, &data);
 	mlx_hook(data.win, KeyRelease, KeyReleaseMask, key_hook_release, &data);
+	mlx_hook(data.win, 17, 0, close_window, &data);
 	mlx_loop(data.mlx);
-	// uint16_t inputs = 0;
-	// inputs = 1 << 3;
-	// int a = inputs & MACRO;
-	// inputs = inputs | MACRO;
-	// inputs = inputs & ~MACRO;
 
 	// y a plus qu a ecrire le reste du code ici
 
