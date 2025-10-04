@@ -19,6 +19,7 @@ SRC			= 	src/main.c	\
 				src/rendering/draw.c \
 				src/rendering/loop.c \
 				src/rendering/vec.c \
+				src/rendering/dda.c \
 				\
 				\
 				src/key/key.c\

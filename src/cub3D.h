@@ -57,6 +57,8 @@
 #define PI16 0.196349541
 #define PI32 0.09817477
 
+#define FOV 1 // 0.57735026919
+
 
 typedef struct s_color
 {
@@ -69,12 +71,30 @@ typedef struct s_point
 {
 	double	x;
 	double	y;
-}t_point;
+}	t_point;
+
+typedef struct s_pointi
+{
+	int	x;
+	int	y;
+}	t_pointi;
+
+typedef struct s_dda
+{
+	t_pointi	map;
+	t_pointi	step;
+	t_point		delta_dist;
+	t_point		side_dist;
+	int			side;
+	int 		start;
+	int			end;
+}	t_dda;
 
 typedef struct s_vec
 {
 	t_point	pos;
-	double	dir;
+	t_point	dir;
+	double	teta;
 }t_vec;
 
 typedef struct s_lst
@@ -117,7 +137,7 @@ typedef struct s_data
 	void		*win;
 	void 		*img;
 	uint32_t 	*buf;
-	t_vec		player;
+	t_vec		plr;
 	t_point		cam;
 	char		**map;
 	int			scrn_x;
@@ -160,14 +180,21 @@ int		close_window(t_data *data);
 // =============================================
 
 // vec
-t_point new_point(double x, double y);
+t_point	new_point(double x, double y);
 
 // loop
-int game_loop(void *arg);
+int		game_loop(void *arg);
 
 // draw
-void draw_map(t_data *data);
-void draw_player(t_data *data);
+void	draw_map(t_data	*data);
+void	draw_player(t_data *data);
+void	draw_wall(t_data *data);
+
+//dda
+void	dda_alg(t_data *data, t_dda *dda, t_point plane, int x);
+
 // function
+
+
 
 #endif

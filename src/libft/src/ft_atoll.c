@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 13:45:14 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/11 14:51:56 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/04 02:30:21 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	calc(char *str, long long *res, int i, int *err)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		*res = (*res * 10) + (str[i++] - '0');
-		if (res < 0)
+		if (*res < 0)
 			*err = 2;
 	}
 	if ((str[i]) && (str[i] < '0' || str[i] > '9') && (str[i] != ' '))
