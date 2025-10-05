@@ -57,6 +57,7 @@
 #define PI8 0.392699082
 #define PI16 0.196349541
 #define PI32 0.09817477
+#define PI42 0.074799825
 
 #define FOV 1 // 0.57735026919
 
@@ -164,6 +165,9 @@ typedef struct s_data
 // tools 
 
 uint32_t	tool_rgba(int r, int g, int b, int a);
+uint32_t	tool_negative(t_color *color);
+uint32_t	tool_gray(t_color *color);
+
 
 // clear
 void		clear_exit(int nb_exit, char *str, t_data *data, void *thing);
