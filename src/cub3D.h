@@ -52,6 +52,7 @@
 #define KEY_RIGHT 65363
 
 #define PI 3.141592654
+#define PI2 1.5707963268
 #define PI4 0.785398163
 #define PI8 0.392699082
 #define PI16 0.196349541
@@ -79,15 +80,34 @@ typedef struct s_pointi
 	int	y;
 }	t_pointi;
 
+typedef struct s_tex
+{
+	void		*img;
+	uint32_t	*buf;
+	int			width;
+	int			height;
+	int			size_w;
+
+} t_tex;
+
 typedef struct s_dda
 {
 	t_pointi	map;
 	t_pointi	step;
 	t_point		delta_dist;
 	t_point		side_dist;
+	t_point		ray_dir;
+	double		wall_dist;
+	int			line_height;
 	int			side;
 	int 		start;
 	int			end;
+	int			tex_x;
+	int			tex_y;
+	double 		wall_x;
+	double		tex_step;
+	double		tex_pos;
+	t_tex		*tex;	
 }	t_dda;
 
 typedef struct s_vec
@@ -119,17 +139,6 @@ typedef struct s_tail
 	size_t			x;
 	size_t			y;
 }	t_tail;
-
-
-typedef struct s_tex
-{
-	void		*img;
-	uint32_t	*buf;
-	int			width;
-	int			height;
-	int			size_w;	
-
-} t_tex;
 
 typedef struct s_data
 {
@@ -192,6 +201,7 @@ void	draw_wall(t_data *data);
 
 //dda
 void	dda_alg(t_data *data, t_dda *dda, t_point plane, int x);
+void	dda_choose_tex(t_data *data, t_dda *dda);
 
 // function
 

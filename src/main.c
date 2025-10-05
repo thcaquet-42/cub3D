@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:14:30 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/04 18:08:16 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/05 06:16:12 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ float	init_player_pos(t_data *data)
 		{
 			data->plr.pos.y = i + 0.5;
 			data->plr.pos.x = j + 0.5;
-			if(data->map[i][j] == 'N')
+			if(data->map[i][j] == 'E')
 				return (0.01 + 0);
-			else if (data->map[i][j] == 'E')
-				return (0.01 + PI4);
+			else if (data->map[i][j] == 'N')
+				return (0.001 + PI2 * 3);
 			else if (data->map[i][j] == 'S')
-				return (0.01 + PI4 * 2);
+				return (0.001 + PI2);
 			else if (data->map[i][j] == 'W')
-				return (0.01 + PI4 * 3);
+				return (0.01 + PI);
 			j++;
 		}
 		i++;
