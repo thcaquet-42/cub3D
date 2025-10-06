@@ -1,10 +1,10 @@
 NO test/Wattaaa.xpm
-SO test/stg.xpm
-F           0,255,0
+SO test/aaa.xpm
+F           0,200,0
 EA test/hell.xpm
 WE test/hmmmm.xpm
 
-C 0,0,0
+C 255,255,255
 
 
 1111111111

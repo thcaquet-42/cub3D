@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:26:23 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/06 19:33:36 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/06 23:27:30 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,8 +170,6 @@ typedef struct s_data
 
 // tools 
 uint32_t	tool_rgba(int r, int g, int b, int a);
-uint32_t	tool_negative(t_color *color);
-uint32_t	tool_gray(t_color *color);
 
 // clear
 void		clear_exit(int nb_exit, char *str, t_data *data, void *thing);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools0.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 17:34:10 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/06 17:24:44 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/06 23:22:31 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ uint32_t	tool_negative(t_color *color)
 	uint8_t	g;
 	uint8_t	b;
 
-	r = (color->r >> 16) & 0xFF;
-	g = (color->g >> 8) & 0xFF;
-	b = (color->b) & 0xFF;
+	r = 255 - color->r;
+	g = 255 - color->g;
+	b = 255 - color->b;
 	return (255 << 24 | r << 16 | g << 8 | b);
 }
