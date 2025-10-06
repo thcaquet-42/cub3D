@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:09:54 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/15 21:44:43 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/06 17:13:30 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	loop_check_case_map(char *line, size_t *i, t_data *data)
 {
-	size_t n;
+	size_t	n;
 
 	n = 0;
 	while (line[*i])
@@ -39,7 +39,7 @@ void	search_map(t_data *data, char *line)
 	{
 		i = 0;
 		if (line == 0)
-			break;
+			break ;
 		if (line[0] == '\n')
 			clear_exit(1, "(1)" ERROR_MAP, data, line);
 		while (line[i] == ' ')

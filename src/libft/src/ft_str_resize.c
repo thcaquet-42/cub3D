@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 21:47:35 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/11 22:07:05 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/06 17:29:13 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_str_resize(char *str, int begin, int size)
 	int		i;
 
 	if (size < 1 || begin > (int) ft_strlen(str))
-		return 0;
+		return (0);
 	new = malloc(size + 1);
 	i = -1;
 	while (str && str[begin + ++i] && i < size)

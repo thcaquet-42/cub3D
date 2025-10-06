@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 16:06:15 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/02 07:54:06 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/06 17:23:48 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	free_tab(char **tab)
 {
-	int i;
+	int	i;
 
 	if (!tab)
-		return;
+		return ;
 	i = 0;
 	while (tab[i])
 	{
@@ -29,9 +29,8 @@ void	free_tab(char **tab)
 
 t_lst	*clear_lst(t_data *data)
 {
-	t_lst *node;
-	t_lst *tmp;
-
+	t_lst	*node;
+	t_lst	*tmp;
 
 	if (!data->lst_map.start)
 		return (0);
@@ -51,8 +50,7 @@ void	clear_data(t_data *data)
 	int	i;
 
 	if (!data)
-		return;
-	
+		return ;
 	clear_lst(data);
 	i = -1;
 	while (++i < 4)
@@ -74,13 +72,11 @@ void	clear_data(t_data *data)
 		close(data->fd);
 	if (data->map)
 		free_tab(data->map);
-	
 }
 
 void	clear_exit(int nb_exit, char *str, t_data *data, void *thing)
 {
 	ft_putstr_fd(str, 2);
-	
 	if (thing)
 		free(thing);
 	if (!data)

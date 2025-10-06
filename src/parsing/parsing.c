@@ -6,13 +6,13 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 19:11:41 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/02 05:51:45 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/06 17:15:29 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-int		chek_path(char *line, int len, t_data *data)
+int	chek_path(char *line, int len, t_data *data)
 {
 	if (len > 4 && line[0] == 'N' && line[1] == 'O' && line[2] == ' ')
 		load_tex(line, len, data, NO);
@@ -44,7 +44,7 @@ void	ensure_preloading_map(t_data *data)
 	if (data->rgb[F].r == -1)
 		clear_exit(1, "(4)" ERROR_RGB, data, 0);
 	if (data->rgb[C].r == -1)
-		clear_exit(1, "(4)" ERROR_RGB, data, 0);;
+		clear_exit(1, "(4)" ERROR_RGB, data, 0);
 }
 
 void	search_path(t_data *data)
@@ -91,7 +91,8 @@ void	parsing(const char *path, t_data *data)
 	node = data->lst_map.start;
 	while (++i < data->lst_map.y)
 	{
-		data->map[i] = ft_strndup(node->str + data->lst_map.min, data->lst_map.x - data->lst_map.min);
+		data->map[i] = ft_strndup(node->str + \
+data->lst_map.min, data->lst_map.x - data->lst_map.min);
 		node = node->next;
 	}
 	data->map[i] = 0;

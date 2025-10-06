@@ -100,7 +100,7 @@ typedef struct s_dda
 	t_point		ray_dir;
 	double		wall_dist;
 	int			line_height;
-	int			side;
+	char		side : 1;
 	int 		start;
 	int			end;
 	int			tex_x;
@@ -191,9 +191,6 @@ void	key_hook(t_data *data);
 int		close_window(t_data *data);
 
 // =============================================
-
-// vec
-t_point	new_point(double x, double y);
 
 // loop
 int		game_loop(void *arg);

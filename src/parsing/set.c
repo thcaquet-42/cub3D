@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 17:26:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/02 05:40:17 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/06 17:15:51 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ void	set_data(t_data *data)
 	data->rgb[F].r = -1;
 	data->rgb[C].r = -1;
 	data->map = 0;
-
 	data->scrn_x = WIDTH;
 	data->scrn_y = HEIGHT;
-
 	data->lst_map = lst_set();
 }

@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:01:59 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/09/12 18:59:45 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/06 17:28:03 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int			gnl_strchr(char *str, char chr);
 char		*gnl_strjoin(char *s1, char *s2);
 void		gnl_rewrite(char *old, char *scrap, int j);
 char		*gnl_dup(char *str);
-
 
 long long	ft_atoll(char *str, int *err);
 

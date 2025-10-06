@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 20:38:43 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/02 06:11:20 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/06 17:14:37 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	load_colors(char *line, int i, t_data *data, int color)
 	i += ft_strcount(&line[i], ' ');
 	if (*(p--) == -1 && ft_isdigit((int) line[i]))
 	{
-		while (++j <= 3  && ++p)
+		while (++j <= 3 && ++p)
 		{
 			*p = ft_atoi(&line[i]);
 			while (ft_isdigit((int) line[i]))
@@ -54,9 +54,9 @@ void	load_tex(char *line, int len, t_data *data, int dir)
 	{
 		tmp = ft_strndup(&line[i], len - (1 + i));
 		data->tex[dir].img = mlx_xpm_file_to_image(data->mlx, \
-			tmp, &data->tex[dir].width, &data->tex[dir].height);
-		data->tex[dir].buf =(uint32_t *) mlx_get_data_addr(data->tex[dir].img, &null, \
-			&data->tex[dir].size_w, &null);
+tmp, &data->tex[dir].width, &data->tex[dir].height);
+		data->tex[dir].buf = (uint32_t *)mlx_get_data_addr(\
+data->tex[dir].img, &null, &data->tex[dir].size_w, &null);
 		data->tex[dir].size_w /= sizeof(data->tex[dir].size_w);
 		free(tmp);
 	}
