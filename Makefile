@@ -1,7 +1,6 @@
 NAME		= cub3D
 
 SRC			= 	src/main.c	\
-				src/hooks.c \
 				\
 				\
 				src/parsing/parsing_map.c \
@@ -25,38 +24,38 @@ SRC			= 	src/main.c	\
 				\
 				\
 
-
-SRC_B		= 	src_bonnus/main.c	\
-				src_bonnus/hooks.c \
-				\
-				\
-				src_bonnus/parsing/parsing_map.c \
-				src_bonnus/parsing/parsing.c \
-				src_bonnus/parsing/set.c \
-				src_bonnus/parsing/load.c \
-				\
-				\
-				src_bonnus/tools/tools0.c \
-				src_bonnus/tools/short_check.c \
-				src_bonnus/tools/lst.c \
-				src_bonnus/tools/clear.c \
-				\
-				\
-				src_bonnus/rendering/draw.c \
-				src_bonnus/rendering/loop.c \
-				src_bonnus/rendering/dda.c \
-				\
-				\
-				src_bonnus/key/key.c\
-				\
-				\
+NAME_B		= cub3D_bonus
 
 
-				
+SRC_B		= 	src_bonus/main.c	\
+				\
+				\
+				src_bonus/parsing/parsing_map.c \
+				src_bonus/parsing/parsing.c \
+				src_bonus/parsing/set.c \
+				src_bonus/parsing/load.c \
+				\
+				\
+				src_bonus/tools/tools0.c \
+				src_bonus/tools/short_check.c \
+				src_bonus/tools/lst.c \
+				src_bonus/tools/clear.c \
+				\
+				\
+				src_bonus/rendering/draw.c \
+				src_bonus/rendering/loop.c \
+				src_bonus/rendering/dda.c \
+				\
+				\
+				src_bonus/key/key.c\
+				\
+				\
+
+		
 OBJ			= $(SRC:.c=.o)
 OBJ_B		= $(SRC_B:.c=.o)
 
-LIB_PATH	= src/libft
+LIB_PATH	= libft
 LIB			= $(LIB_PATH)/libft.a
 
 CFLAGS		= -Werror -Wextra -Wall -g
@@ -76,18 +75,20 @@ $(LIB):
 %.o: %.c
 	cc $(CFLAGS) -c -o $@ $^ $(LDFLAGS)
 
-all: $(LIB) $(NAME)
+all: $(LIB) $(NAME) $(NAME_B)
 
-bonnus: $(lib) $(NAME_B)
+bonus: $(LIB) $(NAME_B)
 
 clean:
 	rm -f $(OBJ)
+	rm -f $(OBJ_B)
 	make -sC $(LIB_PATH) clean
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(NAME_B)
 	make -sC $(LIB_PATH) fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonnus
+.PHONY: all clean fclean re bonus

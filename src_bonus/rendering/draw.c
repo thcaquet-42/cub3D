@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:04:08 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/06 19:33:24 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/06 17:05:01 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,87 @@ void	draw_wall(t_data *data)
 			dda.line_height = 1;
 		dda.tex_step = (double)dda.tex->height / (double)dda.line_height;
 		draw_tex(data, &dda, i);
+	}
+}
+
+void	draw_map(t_data *data)
+{
+	uint32_t	x;
+	uint32_t	y;
+
+	y = 0;
+	while (y < MAP_Y)
+	{
+		x = 0;
+		while (x < MAP_X)
+		{
+			if (data->map[y * data->lst_map.y / MAP_Y]\
+[x * data->lst_map.x / MAP_X] == '1')
+				data->buf[(y) * WIDTH + (WIDTH - MAP_X + x)] \
+= tool_rgba(10, 10, 10, 255);
+			else if (check_is_walkable(\
+data->map[y * data->lst_map.y / MAP_Y][x * data->lst_map.x / MAP_X]))
+				data->buf[(y) \
+* WIDTH + (WIDTH - MAP_X + x)] = tool_negative(&data->rgb[C]);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	draw_vec(t_data *data, double teta, uint32_t color)
+{
+	uint32_t	x;
+	uint32_t	y;
+	uint32_t	ox;
+	uint32_t	oy;
+	int			i;
+
+	oy = (uint32_t)(data->plr.pos.y * MAP_Y / data->lst_map.y);
+	ox = (uint32_t)(data->plr.pos.x * MAP_X / data->lst_map.x);
+	i = 0;
+	x = ox;
+	y = oy;
+	while (++i && (y) * WIDTH + (WIDTH - MAP_X + x) > 0)
+	{
+		if (x >= MAP_X || y >= MAP_Y || \
+(data->buf[(y) * WIDTH + (WIDTH - MAP_X + x)] != tool_negative(&data->rgb[C]) \
+&& (data->buf[(y) * WIDTH + (WIDTH - MAP_X + x)] != color)))
+		{
+			data->buf[(y) * WIDTH + (WIDTH - MAP_X + x)] \
+= tool_rgba(0, 255, 0, 255);
+			break ;
+		}
+		data->buf[(y) * WIDTH + (WIDTH - MAP_X + x)] = color;
+		x = ox + round(i * cos(teta));
+		y = oy + round(i * sin(teta));
+	}
+}
+
+void	draw_player(t_data *data)
+{
+	int	x;
+	int	y;
+	int	cx;
+	int	cy;
+	int	i;
+
+	i = -11;
+	while (++i <= 10)
+		draw_vec(data, data->plr.teta - PI42 * i, tool_gray(&data->rgb[C]));
+	cy = (uint32_t)(data->plr.pos.y * MAP_Y / data->lst_map.y);
+	cx = (uint32_t)(data->plr.pos.x * MAP_X / data->lst_map.x);
+	y = -3;
+	while (y <= 3)
+	{
+		x = -3;
+		while (x <= 3)
+		{
+			if ((y + cy) * WIDTH + (WIDTH - MAP_X + cx + x) > 0)
+				data->buf[(y + cy) * WIDTH + (WIDTH - MAP_X + cx + x)] \
+= tool_rgba(255, 10, 10, 255);
+			++x;
+		}
+		++y;
 	}
 }

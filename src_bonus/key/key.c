@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:51:03 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/06 19:49:06 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/06 17:19:16 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ void	check_edge(t_data *data, double in_x, double in_y)
 
 	nin_x = in_x + data->plr.pos.x;
 	nin_y = in_y + data->plr.pos.y;
-	if ((int) floor(nin_x) < (int) data->lst_map.x - 1 && floor(nin_x) > 0)
+	if (check_is_walkable(data->map[(int) floor(data->plr.pos.y)]\
+[(int) floor(nin_x)]))
 		data->plr.pos.x = nin_x;
-	if ((int) floor(nin_y) < (int) data->lst_map.y - 1 && floor(nin_y) > 0)
+	if (check_is_walkable(data->map[(int) floor(nin_y)][(int)\
+floor(data->plr.pos.x)]))
 		data->plr.pos.y = nin_y;
 }
 

@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:26:23 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/06 19:33:36 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/06 19:30:25 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,8 @@ int			close_window(t_data *data);
 int			game_loop(void *arg);
 
 // draw
+void		draw_map(t_data	*data);
+void		draw_player(t_data *data);
 void		draw_wall(t_data *data);
 
 //dda
