@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:26:23 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/07 06:17:37 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/07 10:08:56 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,28 @@ typedef struct s_tex
 	int			size_w;
 }	t_tex;
 
+typedef struct s_door
+{
+	unsigned char	is : 1;
+	t_pointi		map;
+	t_pointi		step;
+	t_point			delta_dist;
+	t_point			side_dist;
+	t_point			ray_dir;
+	double			wall_dist;
+	int				line_height;
+	char			side : 1;
+	int				start;
+	int				end;
+	int				tex_x;
+	int				tex_y;
+	double			wall_x;
+	double			tex_step;
+	double			tex_pos;
+	t_tex			*tex;
+}	t_door;
+
+
 typedef struct s_dda
 {
 	t_pointi	map;
@@ -116,7 +138,8 @@ typedef struct s_dda
 	double		wall_x;
 	double		tex_step;
 	double		tex_pos;
-	t_tex		*tex;	
+	t_tex		*tex;
+	t_door		door;
 }	t_dda;
 
 typedef struct s_vec
@@ -143,9 +166,9 @@ typedef struct s_tail
 
 typedef struct s_toggle
 {
-	char	map : 1;
-	char	mous : 1;
-	char	door : 1;
+	unsigned char	map : 1;
+	unsigned char	mous : 1;
+	unsigned char	door : 1;
 }	t_toggle;
 
 typedef struct s_data
@@ -188,6 +211,7 @@ int			check_is_spawn(int c);
 int			check_is_walkable(int c);
 int			check_is_edge(int c);
 int			check_is_door(int c);
+int			check_is_wall(int c);
 
 // key
 int			key_hook_press(int key, void *v_data);
@@ -205,6 +229,7 @@ void		draw_map(t_data	*data);
 void		draw_player(t_data *data);
 void		draw_wall(t_data *data);
 void		draw_compass(t_data *data);
+void		draw_door(t_data *data, t_dda *dda, t_pointi i);
 
 //dda
 void		dda_alg(t_data *data, t_dda *dda, t_point plane, int x);

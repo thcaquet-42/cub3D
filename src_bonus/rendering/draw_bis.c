@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 05:11:24 by jaineko           #+#    #+#             */
-/*   Updated: 2025/10/07 06:53:12 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/07 10:32:37 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,26 @@ void	draw_compass(t_data *data)
 				data->buf[(i.y) * WIDTH + (WIDTH - 410 + i.x)] = data->tex[COMPASS].buf[r.y * 200 + r.x];
 		}
 	}
+}
+
+void	draw_door(t_data *data, t_dda *dda, t_pointi i)
+{
+	dda->door.tex_pos = ((double)dda->door.start - (double)HEIGHT / 2.0 + (double)dda->door.line_height / 2.0) * dda->door.tex_step;
+	i.y = dda->door.start;
+	while (++i.y <= dda->door.end)
+	{
+		dda->door.tex_y = (int)dda->door.tex_pos;
+		if (dda->door.tex_y < 0)
+			dda->door.tex_y = 0;
+		if (dda->door.tex_y >= dda->door.tex->height)
+			dda->door.tex_y = dda->door.tex->height - 1;
+		if (i.y < HEIGHT - 1)
+		{
+			if (dda->door.tex->buf[dda->door.tex_y * dda->door.tex->width + (dda->door.tex->width - dda->door.tex_x -1)] != 0)
+				data->buf[i.y * WIDTH + i.x] = dda->door.tex->buf[dda->door.tex_y * dda->door.tex->width + (dda->door.tex->width - dda->door.tex_x -1)];
+			dda->door.tex_pos += dda->door.tex_step;
+		}
+	}
+	dda->door.is = 0;
 }
 

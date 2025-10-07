@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:04:08 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/07 06:58:02 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/07 08:24:05 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ dda->tex->buf[dda->tex_y * dda->tex->width + (dda->tex->width - dda->tex_x -1)];
 			data->buf[i.y * WIDTH + i.x] = \
 tool_rgba(data->rgb[F].r, data->rgb[F].g, data->rgb[F].b, 255);
 	}
+	if (dda->door.is)
+		draw_door(data, dda, i);
 }
 
 void	draw_wall(t_data *data)

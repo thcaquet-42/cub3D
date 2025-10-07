@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 05:16:11 by jaineko           #+#    #+#             */
-/*   Updated: 2025/10/07 06:18:44 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/07 09:57:39 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,10 @@
 
 int	check_is_door(int c)
 {
-	return (c =='C' || c == 'D');
+	return (c == 'C' || c == 'D');
+}
+
+int	check_is_wall(int c)
+{
+	return (c == '1');
 }

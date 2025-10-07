@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 02:40:25 by jaineko           #+#    #+#             */
-/*   Updated: 2025/10/07 05:01:39 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/07 10:30:37 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,51 @@ void	dda_init(t_data *data, t_dda *dda, t_point ray_dir)
 
 void	dda_door(t_data *data, t_dda *dda)
 {
-	printf("door\n"); // 
-	(void) data;
-	(void) dda;
+	dda->door.is = 1;
+	dda->door.side = dda->side;
+	dda->door.tex = &data->tex[COMPASS];
+	dda->door.ray_dir.x = dda->ray_dir.x;
+	dda->door.ray_dir.y = dda->ray_dir.y;
+	dda->door.line_height = dda->line_height;
+	if (dda->door.side == 0)
+		dda->door.wall_dist = dda->side_dist.x - dda->delta_dist.x;
+	else
+		dda->door.wall_dist = dda->side_dist.y - dda->delta_dist.y;
+	dda->door.line_height = (int)((double)HEIGHT / dda->door.wall_dist);
+	dda->door.start = -dda->door.line_height / 2 + HEIGHT / 2;
+	if (dda->door.start < 0)
+		dda->door.start = 0;
+	dda->door.end = dda->door.line_height / 2 + HEIGHT / 2;
+	if (dda->door.side == 0)
+		dda->door.wall_x = data->plr.pos.y + dda->door.wall_dist * dda->door.ray_dir.y;
+	else
+		dda->door.wall_x = data->plr.pos.x + dda->door.wall_dist * dda->door.ray_dir.x;
+	dda->door.tex_x = (int)((dda->door.wall_x - floor(dda->door.wall_x)) * dda->door.tex->width);
+	if (dda->door.tex_x >= dda->door.tex->width)
+		dda->door.tex_x = dda->door.tex->width - 1;
+	if ((!dda->door.side && dda->door.ray_dir.x > 0) || (dda->door.side && dda->door.ray_dir.y < 0))
+		dda->door.tex_x = dda->door.tex->width - dda->door.tex_x - 1;
+	if (dda->door.line_height <= 0)
+		dda->door.line_height = 1;
+	dda->door.tex_step = (double)dda->door.tex->height / (double)dda->door.line_height;
+
+
+
+}
+
+void	get_door(t_data *data, t_dda *dda, int *x)
+{
+	if (data->t_key.door && *x == WIDTH / 2)
+	{
+
+		if (data->map[dda->map.y][dda->map.x] == 'D')
+			data->map[dda->map.y][dda->map.x] = 'C';
+		else if (data->map[dda->map.y][dda->map.x] == 'C')
+			data->map[dda->map.y][dda->map.x] = 'D';
+		data->t_key.door = 0;
+	}
+	if (!dda->door.is)
+		dda_door(data, dda);
 }
 
 void	dda_wall(t_data *data, t_dda *dda, int *x)
@@ -80,15 +122,9 @@ void	dda_wall(t_data *data, t_dda *dda, int *x)
 			dda->map.y += dda->step.y;
 			dda->side = 1;
 		}
-		if (*x == WIDTH / 2 && check_is_door(data->map[dda->map.y][dda->map.x]))
-		{
-			if (data->t_key.door && data->map[dda->map.y][dda->map.x] == 'D')
-				data->map[dda->map.y][dda->map.x] = 'C';
-			else if (data->t_key.door && data->map[dda->map.y][dda->map.x] == 'C')
-				data->map[dda->map.y][dda->map.x] = 'D';
-			data->t_key.door = 0;
-		}
-		if (!check_is_walkable(data->map[dda->map.y][dda->map.x]))
+		if (check_is_door(data->map[dda->map.y][dda->map.x]))
+			get_door(data, dda, x);
+		if (check_is_wall(data->map[dda->map.y][dda->map.x]))
 			break ;
 	}
 }
@@ -97,6 +133,7 @@ void	dda_alg(t_data *data, t_dda *dda, t_point plane, int x)
 {
 	double	camera_x;
 
+	dda->door.is = 0;
 	camera_x = 2.0 * x / (double)WIDTH - 1.0;
 	dda->ray_dir.x = data->plr.dir.x + plane.x * camera_x;
 	dda->ray_dir.y = data->plr.dir.y + plane.y * camera_x;
