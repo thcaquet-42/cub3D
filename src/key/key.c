@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:51:03 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/06 19:49:06 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/07 01:57:05 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,19 @@ int	key_hook_press(int key, void *v_data)
 	t_data			*data;
 
 	data = v_data;
-	if (key == KEY_ESC)
+	if (key == XK_Escape)
 		close_window(data);
-	if (key == KEY_W)
+	if (key == 'w')
 		data->keys = data->keys | BKEY_W;
-	if (key == KEY_S)
+	if (key == 's')
 		data->keys = data->keys | BKEY_S;
-	if (key == KEY_A)
+	if (key == 'a')
 		data->keys = data->keys | BKEY_A;
-	if (key == KEY_D)
+	if (key == 'd')
 		data->keys = data->keys | BKEY_D;
-	if (key == KEY_LEFT)
+	if (key == XK_Left)
 		data->keys = data->keys | BKEY_LEFT;
-	if (key == KEY_RIGHT)
+	if (key == XK_Right)
 		data->keys = data->keys | BKEY_RIGHT;
 	return (0);
 }
@@ -82,17 +82,17 @@ int	key_hook_release(int key, void *v_data)
 	t_data			*data;
 
 	data = v_data;
-	if (key == KEY_W)
+	if (key == 'w')
 		data->keys = data->keys & ~BKEY_W;
-	if (key == KEY_S)
+	if (key == 's')
 		data->keys = data->keys & ~BKEY_S;
-	if (key == KEY_A)
+	if (key == 'a')
 		data->keys = data->keys & ~BKEY_A;
-	if (key == KEY_D)
+	if (key == 'd')
 		data->keys = data->keys & ~BKEY_D;
-	if (key == KEY_LEFT)
+	if (key == XK_Left)
 		data->keys = data->keys & ~BKEY_LEFT;
-	if (key == KEY_RIGHT)
+	if (key == XK_Right)
 		data->keys = data->keys & ~BKEY_RIGHT;
 	return (0);
 }

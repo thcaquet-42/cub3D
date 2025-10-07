@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:14:30 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/06 17:22:06 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/07 03:24:56 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ float	init_player_pos(t_data *data)
 			data->plr.pos.y = i + 0.5;
 			data->plr.pos.x = j + 0.5;
 			if (data->map[i][j] == 'E')
-				return (0.01 + 0);
+				return (2 * PI + 0.0001 + 0);
 			else if (data->map[i][j] == 'N')
-				return (0.001 + PI2 * 3);
+				return (2 * PI + 0.0001 + PI2 * 3);
 			else if (data->map[i][j] == 'S')
-				return (0.001 + PI2);
+				return (2 * PI + 0.0001 + PI2);
 			else if (data->map[i][j] == 'W')
-				return (0.01 + PI);
+				return (2 * PI + 0.0001 + PI);
 			j++;
 		}
 		i++;
@@ -59,7 +59,26 @@ void	init_all(t_data *data, char **av)
 	if (data->img == 0)
 		clear_exit(1, ERROR_MLX, data, 0);
 	data->buf = (uint32_t *) mlx_get_data_addr(data->img, &nul, &nul, &nul);
+	data->t_key.map = 1;
+	data->t_key.mous = 1;
 }
+
+int mouse_move_hook(int x, int y, t_data *data)
+{
+	if (data->t_key.mous)
+	{
+		if (x != WIDTH / 2)
+		{
+			data->plr.teta += (x - WIDTH / 2) * 0.0001;
+			data->plr.dir.x = cos(data->plr.teta);
+			data->plr.dir.y = sin(data->plr.teta);
+			mlx_mouse_move(data->mlx, data->win, WIDTH / 2, HEIGHT / 2);
+		}
+	}
+	(void) y;
+	return (0);
+}
+
 
 int	main(int ac, char **av)
 {
@@ -69,10 +88,12 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		clear_exit(1, ERROR_ARG, 0, 0);
 	init_all(&data, av);
+	mlx_mouse_hide(data.mlx, data.win);
 	mlx_loop_hook(data.mlx, game_loop, &data);
 	mlx_hook(data.win, KeyPress, KeyPressMask, key_hook_press, &data);
 	mlx_hook(data.win, KeyRelease, KeyReleaseMask, key_hook_release, &data);
 	mlx_hook(data.win, 17, 0, close_window, &data);
+	mlx_hook(data.win, MotionNotify, PointerMotionMask, mouse_move_hook, &data);
 	mlx_loop(data.mlx);
 	clear_data(&data);
 }

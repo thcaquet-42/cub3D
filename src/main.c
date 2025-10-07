@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:14:30 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/06 17:22:06 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/07 00:28:58 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ float	init_player_pos(t_data *data)
 			data->plr.pos.y = i + 0.5;
 			data->plr.pos.x = j + 0.5;
 			if (data->map[i][j] == 'E')
-				return (0.01 + 0);
+				return (0.001 + 0);
 			else if (data->map[i][j] == 'N')
 				return (0.001 + PI2 * 3);
 			else if (data->map[i][j] == 'S')
 				return (0.001 + PI2);
 			else if (data->map[i][j] == 'W')
-				return (0.01 + PI);
+				return (0.001 + PI);
 			j++;
 		}
 		i++;

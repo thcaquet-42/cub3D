@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:26:23 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/06 19:30:25 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/07 01:41:47 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,6 @@
 # define BKEY_LEFT  16
 # define BKEY_RIGHT 32
 
-# define KEY_W 119
-# define KEY_A 97
-# define KEY_S 115
-# define KEY_D 100
-# define KEY_ESC 65307
-# define KEY_LEFT  65361
-# define KEY_RIGHT 65363
-
 # define PI 3.141592654
 # define PI2 1.5707963268
 # define PI4 0.785398163
@@ -71,6 +63,7 @@
 # define PI42 0.074799825
 
 # define FOV 1 // 0.57735026919
+# define S 1000000
 
 typedef struct s_color
 {
@@ -133,14 +126,6 @@ typedef struct s_lst
 	char			*str;
 }	t_lst;
 
-typedef struct s_arrow
-{
-	t_point	front;
-	t_point	back;
-	t_point	side;
-	t_point	sym;
-}	t_arrow;
-
 typedef struct s_tail
 {
 	struct s_lst	*start;
@@ -149,6 +134,12 @@ typedef struct s_tail
 	size_t			x;
 	size_t			y;
 }	t_tail;
+
+typedef struct s_toggle
+{
+	char	map : 1;
+	char	mous : 1;
+}	t_toggle;
 
 typedef struct s_data
 {
@@ -166,6 +157,7 @@ typedef struct s_data
 	t_tail		lst_map;
 	int			fd;
 	int			keys;
+	t_toggle	t_key;
 }	t_data;
 
 // tools 

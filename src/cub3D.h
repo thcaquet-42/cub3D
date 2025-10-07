@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:26:23 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/06 23:27:30 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/07 01:39:27 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,6 @@
 # define BKEY_LEFT  16
 # define BKEY_RIGHT 32
 
-# define KEY_W 119
-# define KEY_A 97
-# define KEY_S 115
-# define KEY_D 100
-# define KEY_ESC 65307
-# define KEY_LEFT  65361
-# define KEY_RIGHT 65363
-
 # define PI 3.141592654
 # define PI2 1.5707963268
 # define PI4 0.785398163
@@ -70,7 +62,7 @@
 # define PI32 0.09817477
 # define PI42 0.074799825
 
-# define FOV 1 // 0.57735026919
+# define FOV 1
 
 typedef struct s_color
 {
@@ -132,14 +124,6 @@ typedef struct s_lst
 	struct s_lst	*next;
 	char			*str;
 }	t_lst;
-
-typedef struct s_arrow
-{
-	t_point	front;
-	t_point	back;
-	t_point	side;
-	t_point	sym;
-}	t_arrow;
 
 typedef struct s_tail
 {
