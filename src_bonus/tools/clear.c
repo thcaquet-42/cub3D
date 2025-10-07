@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 16:06:15 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/06 17:23:48 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/07 07:25:13 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	clear_data(t_data *data)
 		return ;
 	clear_lst(data);
 	i = -1;
-	while (++i < 4)
+	while (++i < 5)
 	{
 		if (data->tex[i].img)
 		{

@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 20:38:43 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/06 22:43:14 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/07 06:59:45 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,30 +41,35 @@ void	load_colors(char *line, int i, t_data *data, int color)
 		clear_exit(1, "(3)" ERROR_RGB, data, line);
 }
 
-void	load_tex(char *line, int len, t_data *data, int dir)
+void	load_tex_bis(char *line, char *path, t_data *data, int dir)
 {
-	char	*tmp;
-	int		i;
 	int		null;
 
+	data->tex[dir].img = mlx_xpm_file_to_image(data->mlx, path, &data->tex[dir].width, &data->tex[dir].height);
+	free(path);
+	if (data->tex[dir].img == 0)
+		clear_exit(1, "(2)"ERROR_LOAD_TEX, data, line);
+	data->tex[dir].buf = (uint32_t *)mlx_get_data_addr(data->tex[dir].img, &null, &data->tex[dir].size_w, &null);
+	if (data->tex[dir].buf == 0)
+		clear_exit(1, "(3)"ERROR_LOAD_TEX, data, line);
+	data->tex[dir].size_w /= sizeof(data->tex[dir].size_w);	
+}
+
+void	load_tex(char *line, int len, t_data *data, int dir)
+{
+	int		i;
+	char	*path;
+	
 	i = 3;
 	while (line[i] == ' ')
 		++i;
+	path = ft_strndup(&line[i], len - (1 + i));
+	if (path == 0)
+		clear_exit(1, ERROR_MALLOC, data, line);
 	if (data->tex[dir].img == 0)
-	{
-		tmp = ft_strndup(&line[i], len - (1 + i));
-		data->tex[dir].img = mlx_xpm_file_to_image(data->mlx, \
-tmp, &data->tex[dir].width, &data->tex[dir].height);
-		free(tmp);
-		if (data->tex[dir].img == 0)
-			clear_exit(1, ERROR_LOAD_TEX, data, line);
-		data->tex[dir].buf = (uint32_t *)mlx_get_data_addr\
-(data->tex[dir].img, &null, &data->tex[dir].size_w, &null);
-		data->tex[dir].size_w /= sizeof(data->tex[dir].size_w);
-		
-	}
+		load_tex_bis(line, path, data, dir);
 	else
 		clear_exit(1, ERROR_MULTI_TEX, data, line);
 	if (data->tex[dir].img == 0)
-		clear_exit(1, ERROR_LOAD_TEX, data, line);
+		clear_exit(1, "(4)"ERROR_LOAD_TEX, data,line);
 }

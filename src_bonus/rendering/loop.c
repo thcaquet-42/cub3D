@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:04:17 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/07 03:20:13 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/07 06:19:26 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,22 @@ void	print_fps(t_data *data)
 	struct timeval	tv;
 	static long		tim_us;
 	t_pointi		i;
+	char			*fps;
 
 	gettimeofday(&tv, NULL);
 	i.y = -1;
-	while (++i.y < 10)
+	fps = ft_itoa(-S / (tim_us - tv.tv_usec));
+	if (fps)
 	{
-		i.x = -1;
-		while (++i.x < 13)
-			data->buf[i.y * WIDTH + WIDTH - 231 + i.x] = 0;
+		while (++i.y < 12)
+		{
+			i.x = -2;
+			while (++i.x < 7 * (int)strlen(fps))
+				data->buf[i.y * WIDTH + WIDTH - 231 + i.x] = 0;
+		}
+		mlx_string_put(data->mlx, data->win, WIDTH - 230, 10, -1, fps);
+		free(fps);
 	}
-	mlx_string_put(data->mlx, data->win, WIDTH - 230, 10, -1, ft_itoa(-S / (tim_us - tv.tv_usec)));
 	tim_us = tv.tv_usec;
 }
 
@@ -39,6 +45,7 @@ int	game_loop(void *arg)
 	draw_wall(data);
 	if (data->t_key.map)
 	{
+		draw_compass(data);
 		draw_map(data);
 		draw_player(data);
 	}

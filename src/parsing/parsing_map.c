@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:09:54 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/06 17:13:30 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/07 07:18:07 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ void	look_neighbor(t_data *data, int x, int y)
 {
 	if (x - 1 < 0 || check_is_void(data->map[y][x - 1]))
 		clear_exit(1, "(6)" ERROR_MAP, data, 0);
-	if (x + 1 > (int) data->lst_map.x || check_is_void(data->map[y][x + 1]))
+	if (x + 1 > (int) data->lst_map.x - 1 || check_is_void(data->map[y][x + 1]))
 		clear_exit(1, "(7)" ERROR_MAP, data, 0);
 	if (y - 1 < 0 || check_is_void(data->map[y - 1][x]))
 		clear_exit(1, "(8)" ERROR_MAP, data, 0);
-	if (y + 1 > (int) data->lst_map.y || check_is_void(data->map[y + 1][x]))
+	if (y + 1 > (int) data->lst_map.y - 1 || check_is_void(data->map[y + 1][x]))
 		clear_exit(1, "(9)" ERROR_MAP, data, 0);
 }
 

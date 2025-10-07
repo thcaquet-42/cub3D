@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 02:40:25 by jaineko           #+#    #+#             */
-/*   Updated: 2025/10/07 02:38:18 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/07 05:01:39 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,14 @@ void	dda_init(t_data *data, t_dda *dda, t_point ray_dir)
 	}
 }
 
-void	dda_wall(t_data *data, t_dda *dda)
+void	dda_door(t_data *data, t_dda *dda)
+{
+	printf("door\n"); // 
+	(void) data;
+	(void) dda;
+}
+
+void	dda_wall(t_data *data, t_dda *dda, int *x)
 {
 	while (1)
 	{
@@ -72,6 +79,14 @@ void	dda_wall(t_data *data, t_dda *dda)
 			dda->side_dist.y += dda->delta_dist.y;
 			dda->map.y += dda->step.y;
 			dda->side = 1;
+		}
+		if (*x == WIDTH / 2 && check_is_door(data->map[dda->map.y][dda->map.x]))
+		{
+			if (data->t_key.door && data->map[dda->map.y][dda->map.x] == 'D')
+				data->map[dda->map.y][dda->map.x] = 'C';
+			else if (data->t_key.door && data->map[dda->map.y][dda->map.x] == 'C')
+				data->map[dda->map.y][dda->map.x] = 'D';
+			data->t_key.door = 0;
 		}
 		if (!check_is_walkable(data->map[dda->map.y][dda->map.x]))
 			break ;
@@ -90,7 +105,7 @@ void	dda_alg(t_data *data, t_dda *dda, t_point plane, int x)
 	dda->delta_dist.x = fabs(1.0 / dda->ray_dir.x);
 	dda->delta_dist.y = fabs(1.0 / dda->ray_dir.y);
 	dda_init(data, dda, dda->ray_dir);
-	dda_wall(data, dda);
+	dda_wall(data, dda, &x);
 	if (dda->side == 0)
 		dda->wall_dist = dda->side_dist.x - dda->delta_dist.x;
 	else

@@ -38,11 +38,13 @@ SRC_B		= 	src_bonus/main.c	\
 				\
 				src_bonus/tools/tools0.c \
 				src_bonus/tools/short_check.c \
+				src_bonus/tools/short_check_bis.c \
 				src_bonus/tools/lst.c \
 				src_bonus/tools/clear.c \
 				\
 				\
 				src_bonus/rendering/draw.c \
+				src_bonus/rendering/draw_bis.c \
 				src_bonus/rendering/loop.c \
 				src_bonus/rendering/dda.c \
 				\

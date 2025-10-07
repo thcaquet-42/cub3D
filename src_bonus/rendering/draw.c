@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:04:08 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/06 23:38:51 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/07 06:58:02 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	draw_map(t_data *data)
 [x * data->lst_map.x / MAP_X] == '1')
 				data->buf[(y) * WIDTH + (WIDTH - MAP_X + x)] \
 = tool_rgba(10, 10, 10, 255);
-			else if (check_is_walkable(\
+			else if (check_is_edge(\
 data->map[y * data->lst_map.y / MAP_Y][x * data->lst_map.x / MAP_X]))
 				data->buf[(y) \
 * WIDTH + (WIDTH - MAP_X + x)] = tool_negative(&data->rgb[C]);

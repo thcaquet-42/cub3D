@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 17:17:07 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/06 17:17:11 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/07 05:58:12 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	pars_map(t_data *data);
 
 void	load_colors(char *line, int i, t_data *data, int color);
 void	load_tex(char *line, int len, t_data *data, int cardinal);
+void	load_tex_bis(char *line, char *path, t_data *data, int dir);
 
 // set
 

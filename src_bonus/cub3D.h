@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:26:23 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/07 01:41:47 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/07 06:17:37 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define SO 1
 # define WE 2
 # define EA 3
+# define COMPASS 4
 # define F 0
 # define C 1
 
@@ -46,13 +47,18 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
+// # define WIDTH 1600
+// # define HEIGHT 900
+// # define WIDTH 1280
+// # define HEIGHT 800
 
 # define BKEY_W 1
 # define BKEY_A 2
 # define BKEY_S 4
 # define BKEY_D 8
-# define BKEY_LEFT  16
-# define BKEY_RIGHT 32
+# define BKEY_E 16
+# define BKEY_LEFT  32
+# define BKEY_RIGHT 64
 
 # define PI 3.141592654
 # define PI2 1.5707963268
@@ -139,6 +145,7 @@ typedef struct s_toggle
 {
 	char	map : 1;
 	char	mous : 1;
+	char	door : 1;
 }	t_toggle;
 
 typedef struct s_data
@@ -152,7 +159,7 @@ typedef struct s_data
 	char		**map;
 	int			scrn_x;
 	int			scrn_y;
-	t_tex		tex[4];
+	t_tex		tex[5];
 	t_color		rgb[2];
 	t_tail		lst_map;
 	int			fd;
@@ -179,6 +186,8 @@ int			check_is_void(int c);
 int			check_case_map(int c);
 int			check_is_spawn(int c);
 int			check_is_walkable(int c);
+int			check_is_edge(int c);
+int			check_is_door(int c);
 
 // key
 int			key_hook_press(int key, void *v_data);
@@ -195,6 +204,7 @@ int			game_loop(void *arg);
 void		draw_map(t_data	*data);
 void		draw_player(t_data *data);
 void		draw_wall(t_data *data);
+void		draw_compass(t_data *data);
 
 //dda
 void		dda_alg(t_data *data, t_dda *dda, t_point plane, int x);

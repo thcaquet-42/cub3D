@@ -6,17 +6,11 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:51:03 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/07 03:06:24 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/07 06:57:58 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
-
-int	close_window(t_data *data)
-{
-	mlx_loop_end(data->mlx);
-	return (0);
-}
 
 void	check_edge(t_data *data, double in_x, double in_y)
 {
@@ -57,6 +51,17 @@ void	key_hook(t_data *data)
 	}
 }
 
+void	key_hook_press_bis(int key, t_data *data)
+{
+	if (key == 'f')
+	{
+		if (++data->t_key.mous)
+			mlx_mouse_hide(data->mlx, data->win);
+		else
+			mlx_mouse_show(data->mlx, data->win);
+	}
+}
+
 int	key_hook_press(int key, void *v_data)
 {
 	t_data	*data;
@@ -72,19 +77,15 @@ int	key_hook_press(int key, void *v_data)
 		data->keys = data->keys | BKEY_A;
 	if (key == 'd')
 		data->keys = data->keys | BKEY_D;
+	if (key == 'e')
+		data->t_key.door = 1;
 	if (key == XK_Left)
 		data->keys = data->keys | BKEY_LEFT;
 	if (key == XK_Right)
 		data->keys = data->keys | BKEY_RIGHT;
 	if (key == XK_Tab)
 		++data->t_key.map;
-	if (key == 'f')
-	{
-		if (++data->t_key.mous)
-			mlx_mouse_hide(data->mlx, data->win);
-		else
-			mlx_mouse_show(data->mlx, data->win);
-	}
+	key_hook_press_bis(key, data);
 	return (0);
 }
 
@@ -101,9 +102,12 @@ int	key_hook_release(int key, void *v_data)
 		data->keys = data->keys & ~BKEY_A;
 	if (key == 'd')
 		data->keys = data->keys & ~BKEY_D;
+	if (key == 'e')
+		data->t_key.door = 0;
 	if (key == XK_Left)
 		data->keys = data->keys & ~BKEY_LEFT;
 	if (key == XK_Right)
 		data->keys = data->keys & ~BKEY_RIGHT;
+
 	return (0);
 }

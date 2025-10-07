@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 19:11:41 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/06 17:15:29 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/07 07:19:38 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,18 @@ int	chek_path(char *line, int len, t_data *data)
 
 void	ensure_preloading_map(t_data *data)
 {
+	load_tex_bis(0, ft_strdup("src_bonus/tex/compass.xpm"), data, COMPASS);
+	if (!data->tex[COMPASS].buf && data->tex[COMPASS].height == 200
+		&& data->tex[COMPASS].width == 200)
+		clear_exit(1, "(5)" ERROR_LOAD_TEX, data, 0);
 	if (!data->tex[NO].buf)
-		clear_exit(1, "(4)" ERROR_LOAD_TEX, data, 0);
+		clear_exit(1, "(6)" ERROR_LOAD_TEX, data, 0);
 	if (!data->tex[SO].buf)
-		clear_exit(1, "(4)" ERROR_LOAD_TEX, data, 0);
+		clear_exit(1, "(7)" ERROR_LOAD_TEX, data, 0);
 	if (!data->tex[WE].buf)
-		clear_exit(1, "(4)" ERROR_LOAD_TEX, data, 0);
+		clear_exit(1, "(8)" ERROR_LOAD_TEX, data, 0);
 	if (!data->tex[EA].buf)
-		clear_exit(1, "(4)" ERROR_LOAD_TEX, data, 0);
+		clear_exit(1, "(9)" ERROR_LOAD_TEX, data, 0);
 	if (data->rgb[F].r == -1)
 		clear_exit(1, "(4)" ERROR_RGB, data, 0);
 	if (data->rgb[C].r == -1)

@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:14:30 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/07 03:24:56 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/07 04:37:12 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ float	init_player_pos(t_data *data)
 			data->plr.pos.y = i + 0.5;
 			data->plr.pos.x = j + 0.5;
 			if (data->map[i][j] == 'E')
-				return (2 * PI + 0.0001 + 0);
+				return (0.0001 + 0);
 			else if (data->map[i][j] == 'N')
-				return (2 * PI + 0.0001 + PI2 * 3);
+				return (0.0001 + PI2 * 3);
 			else if (data->map[i][j] == 'S')
-				return (2 * PI + 0.0001 + PI2);
+				return (0.0001 + PI2);
 			else if (data->map[i][j] == 'W')
-				return (2 * PI + 0.0001 + PI);
+				return (0.0001 + PI);
 			j++;
 		}
 		i++;
@@ -79,6 +79,11 @@ int mouse_move_hook(int x, int y, t_data *data)
 	return (0);
 }
 
+int	close_window(t_data *data)
+{
+	mlx_loop_end(data->mlx);
+	return (0);
+}
 
 int	main(int ac, char **av)
 {
