@@ -6,16 +6,16 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:51:03 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/07 10:29:52 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/09 03:40:24 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-void	check_edge(t_data *data, double in_x, double in_y)
+void	check_edge(t_data *data, float in_x, float in_y)
 {
-	double	nin_x;
-	double	nin_y;
+	float	nin_x;
+	float	nin_y;
 
 	nin_x = in_x + data->plr.pos.x;
 	nin_y = in_y + data->plr.pos.y;

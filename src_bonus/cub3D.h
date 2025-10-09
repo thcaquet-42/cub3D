@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:26:23 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/07 10:08:56 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/09 03:41:31 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,13 @@
 # define FOV 1 // 0.57735026919
 # define S 1000000
 
+# define COLOR_EDGE 10
+# define COLOR_R 16711680
+# define COLOR_G 65280
+# define COLOR_B 255
+# define COLOR_A 4278190080
+
+
 typedef struct s_color
 {
 	int	r;
@@ -80,8 +87,8 @@ typedef struct s_color
 
 typedef struct s_point
 {
-	double	x;
-	double	y;
+	float	x;
+	float	y;
 }	t_point;
 
 typedef struct s_pointi
@@ -89,6 +96,12 @@ typedef struct s_pointi
 	int	x;
 	int	y;
 }	t_pointi;
+
+typedef struct s_pointu
+{
+	uint32_t	x;
+	uint32_t	y;
+}	t_pointu;
 
 typedef struct s_tex
 {
@@ -99,6 +112,18 @@ typedef struct s_tex
 	int			size_w;
 }	t_tex;
 
+typedef struct s_draw_tex
+{
+	t_pointu	color;
+	float		tex_pos;
+	int			start;
+	int			end;
+	int			tex_y;
+	int			tex_w;
+	int			tex_h;
+	uint32_t	dst;
+}	t_draw_tex;
+
 typedef struct s_door
 {
 	unsigned char	is : 1;
@@ -107,16 +132,16 @@ typedef struct s_door
 	t_point			delta_dist;
 	t_point			side_dist;
 	t_point			ray_dir;
-	double			wall_dist;
+	float			wall_dist;
 	int				line_height;
 	char			side : 1;
 	int				start;
 	int				end;
 	int				tex_x;
 	int				tex_y;
-	double			wall_x;
-	double			tex_step;
-	double			tex_pos;
+	float			wall_x;
+	float			tex_step;
+	float			tex_pos;
 	t_tex			*tex;
 }	t_door;
 
@@ -128,16 +153,16 @@ typedef struct s_dda
 	t_point		delta_dist;
 	t_point		side_dist;
 	t_point		ray_dir;
-	double		wall_dist;
+	float		wall_dist;
 	int			line_height;
 	char		side : 1;
 	int			start;
 	int			end;
 	int			tex_x;
 	int			tex_y;
-	double		wall_x;
-	double		tex_step;
-	double		tex_pos;
+	float		wall_x;
+	float		tex_step;
+	float		tex_pos;
 	t_tex		*tex;
 	t_door		door;
 }	t_dda;
@@ -146,7 +171,7 @@ typedef struct s_vec
 {
 	t_point	pos;
 	t_point	dir;
-	double	teta;
+	float	teta;
 }	t_vec;
 
 typedef struct s_lst
@@ -179,7 +204,7 @@ typedef struct s_data
 	uint32_t	*buf;
 	t_vec		plr;
 	t_point		cam;
-	char		**map;
+	char		***map;
 	int			scrn_x;
 	int			scrn_y;
 	t_tex		tex[5];
@@ -192,7 +217,7 @@ typedef struct s_data
 
 // tools 
 uint32_t	tool_rgba(int r, int g, int b, int a);
-uint32_t	tool_negative(t_color *color);
+uint32_t	tool_rev(t_color *color);
 uint32_t	tool_gray(t_color *color);
 
 // clear
@@ -229,7 +254,7 @@ void		draw_map(t_data	*data);
 void		draw_player(t_data *data);
 void		draw_wall(t_data *data);
 void		draw_compass(t_data *data);
-void		draw_door(t_data *data, t_dda *dda, t_pointi i);
+void		draw_door(t_data *data, t_door *door, t_pointi i);
 
 //dda
 void		dda_alg(t_data *data, t_dda *dda, t_point plane, int x);

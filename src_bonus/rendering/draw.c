@@ -6,121 +6,88 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:04:08 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/07 08:24:05 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/09 02:45:39 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-void	draw_tex(t_data *data, t_dda *dda, t_pointi i)
-{
-	dda->tex_pos = ((double)dda->start - (double)HEIGHT / 2.0 + \
-(double)dda->line_height / 2.0) * dda->tex_step;
-	i.y = -1;
-	while (++i.y < HEIGHT)
-	{
-		if (i.y < dda->start)
-			data->buf[i.y * WIDTH + i.x] = \
-tool_rgba(data->rgb[C].r, data->rgb[C].g, data->rgb[C].b, 255);
-		else if (i.y <= dda->end)
-		{
-			dda->tex_y = (int)dda->tex_pos;
-			if (dda->tex_y < 0)
-				dda->tex_y = 0;
-			if (dda->tex_y >= dda->tex->height)
-				dda->tex_y = dda->tex->height - 1;
-			data->buf[i.y * WIDTH + i.x] = \
-dda->tex->buf[dda->tex_y * dda->tex->width + (dda->tex->width - dda->tex_x -1)];
-			dda->tex_pos += dda->tex_step;
-		}
-		else
-			data->buf[i.y * WIDTH + i.x] = \
-tool_rgba(data->rgb[F].r, data->rgb[F].g, data->rgb[F].b, 255);
-	}
-	if (dda->door.is)
-		draw_door(data, dda, i);
-}
-
-void	draw_wall(t_data *data)
+void	draw_compass(t_data *data)
 {
 	t_pointi	i;
-	t_point		plane;
-	t_dda		dda;
+	t_pointi	r;
+	float		cos_a;
+	float		sin_a;
 
-	plane.x = -data->plr.dir.y * FOV;
-	plane.y = data->plr.dir.x * FOV;
-	i.x = -1;
-	while (++i.x < WIDTH)
+	i.y = -1;
+	cos_a = cos(data->plr.teta + PI2);
+	sin_a = sin(data->plr.teta + PI2);
+	while (++i.y < 200)
 	{
-		dda_alg(data, &dda, plane, i.x);
-		dda_choose_tex(data, &dda);
-		if (dda.side == 0)
-			dda.wall_x = data->plr.pos.y + dda.wall_dist * dda.ray_dir.y;
-		else
-			dda.wall_x = data->plr.pos.x + dda.wall_dist * dda.ray_dir.x;
-		dda.tex_x = (int)((dda.wall_x - floor(dda.wall_x)) * dda.tex->width);
-		if (dda.tex_x >= dda.tex->width)
-			dda.tex_x = dda.tex->width - 1;
-		if ((!dda.side && dda.ray_dir.x > 0) || (dda.side && dda.ray_dir.y < 0))
-			dda.tex_x = dda.tex->width - dda.tex_x - 1;
-		if (dda.line_height <= 0)
-			dda.line_height = 1;
-		dda.tex_step = (double)dda.tex->height / (double)dda.line_height;
-		draw_tex(data, &dda, i);
+		i.x = -1;
+		while (++i.x < 200)
+		{
+			r.x = (int)(cos_a * (i.x - 100) - sin_a * (i.y - 100) + 100);
+			r.y = (int)(sin_a * (i.x - 100) + cos_a * (i.y - 100) + 100);
+			if ((r.x >= 0 && r.x < 200 && r.y >= 0 && r.y < 200) && (data->tex[COMPASS].buf[r.y * 200 + r.x] != 0))
+				data->buf[(i.y) * WIDTH + (WIDTH - 410 + i.x)] = data->tex[COMPASS].buf[r.y * 200 + r.x];
+		}
 	}
 }
 
 void	draw_map(t_data *data)
 {
-	uint32_t	x;
-	uint32_t	y;
+	t_pointu	i;
+	uint32_t	i_map;
+	uint32_t	color;
+	size_t		s_x;
+	size_t		s_y;
 
-	y = 0;
-	while (y < MAP_Y)
+	i_map = (WIDTH - MAP_X);
+	i.y = 0;
+	s_x = data->lst_map.x;
+	s_y = data->lst_map.y;
+	color = tool_rev(&data->rgb[C]);
+	while (i.y < MAP_Y)
 	{
-		x = 0;
-		while (x < MAP_X)
+		i.x = 0;
+		while (i.x < MAP_X)
 		{
-			if (data->map[y * data->lst_map.y / MAP_Y]\
-[x * data->lst_map.x / MAP_X] == '1')
-				data->buf[(y) * WIDTH + (WIDTH - MAP_X + x)] \
-= tool_rgba(10, 10, 10, 255);
-			else if (check_is_edge(\
-data->map[y * data->lst_map.y / MAP_Y][x * data->lst_map.x / MAP_X]))
-				data->buf[(y) \
-* WIDTH + (WIDTH - MAP_X + x)] = tool_negative(&data->rgb[C]);
-			x++;
+			if (data->map[i.y * s_y / MAP_Y][i.x * s_x / MAP_X] == '1')
+				data->buf[i_map + i.x] = COLOR_EDGE;
+			else if (check_is_edge(data->map[i.y * s_y / MAP_Y][i.x * s_x / MAP_X]))
+				data->buf[i_map + i.x] = color;
+			++i.x;
 		}
-		y++;
+		++i.y;
+		i_map += WIDTH;
 	}
 }
 
-void	draw_vec(t_data *data, double teta, uint32_t color)
+void	draw_vec(t_data *data, float teta, const uint32_t gray, const uint32_t rev)
 {
-	uint32_t	x;
-	uint32_t	y;
-	uint32_t	ox;
-	uint32_t	oy;
+	uint32_t	dst;
+	t_pointu	j;
+	t_pointu	o;
 	int			i;
 
-	oy = (uint32_t)(data->plr.pos.y * MAP_Y / data->lst_map.y);
-	ox = (uint32_t)(data->plr.pos.x * MAP_X / data->lst_map.x);
+	o.y = (uint32_t)(data->plr.pos.y * MAP_Y / data->lst_map.y);
+	o.x = (uint32_t)(data->plr.pos.x * MAP_X / data->lst_map.x);
 	i = 0;
-	x = ox;
-	y = oy;
-	while (++i && (y) * WIDTH + (WIDTH - MAP_X + x) > 0)
+	j.x = o.x;
+	j.y = o.y;
+	dst = (j.y * WIDTH) + (WIDTH - MAP_X + j.x);
+	while (++i && dst > 0 && j.x < MAP_X && j.y < MAP_Y)
 	{
-		if (x >= MAP_X || y >= MAP_Y || \
-(data->buf[(y) * WIDTH + (WIDTH - MAP_X + x)] != tool_negative(&data->rgb[C]) \
-&& (data->buf[(y) * WIDTH + (WIDTH - MAP_X + x)] != color)))
+		if ((data->buf[dst] != rev && (data->buf[dst] != gray)))
 		{
-			data->buf[(y) * WIDTH + (WIDTH - MAP_X + x)] \
-= tool_rgba(0, 255, 0, 255);
+			data->buf[dst] = COLOR_G;
 			break ;
 		}
-		data->buf[(y) * WIDTH + (WIDTH - MAP_X + x)] = color;
-		x = ox + round(i * cos(teta));
-		y = oy + round(i * sin(teta));
+		data->buf[dst] = gray;
+		j.x = o.x + round(i * cos(teta));
+		j.y = o.y + round(i * sin(teta));
+		dst = (j.y * WIDTH) + (WIDTH - MAP_X + j.x);
 	}
 }
 
@@ -134,7 +101,7 @@ void	draw_player(t_data *data)
 
 	i = -11;
 	while (++i <= 10)
-		draw_vec(data, data->plr.teta - PI42 * i, tool_gray(&data->rgb[C]));
+		draw_vec(data, data->plr.teta - PI42 * i, tool_gray(&data->rgb[C]), tool_rev(&data->rgb[C]));
 	cy = (uint32_t)(data->plr.pos.y * MAP_Y / data->lst_map.y);
 	cx = (uint32_t)(data->plr.pos.x * MAP_X / data->lst_map.x);
 	y = -3;
@@ -144,8 +111,7 @@ void	draw_player(t_data *data)
 		while (x <= 3)
 		{
 			if ((y + cy) * WIDTH + (WIDTH - MAP_X + cx + x) > 0)
-				data->buf[(y + cy) * WIDTH + (WIDTH - MAP_X + cx + x)] \
-= tool_rgba(255, 10, 10, 255);
+				data->buf[(y + cy) * WIDTH + (WIDTH - MAP_X + cx + x)] = COLOR_R;
 			++x;
 		}
 		++y;

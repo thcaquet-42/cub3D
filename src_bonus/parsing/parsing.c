@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 19:11:41 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/07 07:19:38 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/09 03:32:37 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	search_path(t_data *data)
 	}
 	ensure_preloading_map(data);
 	search_map(data, line);
-	data->map = malloc(sizeof(char **) * (data->lst_map.y + 1));
+	data->map = malloc(sizeof(char ***) * (data->lst_map.y + 1));
 	if (!data->map)
 		clear_exit(1, "(1)" ERROR_MALLOC, data, 0);
 	data->fd = close(data->fd);
