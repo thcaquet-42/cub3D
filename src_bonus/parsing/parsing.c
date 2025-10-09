@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 19:11:41 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/09 03:32:37 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/09 05:05:52 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,23 @@ void	ensure_preloading_map(t_data *data)
 		clear_exit(1, "(4)" ERROR_RGB, data, 0);
 }
 
+void	init_map(t_data *data)
+{
+	data->map = malloc(sizeof(char ***) * 3);
+	if (!data->map)
+		clear_exit(1, "(0)" ERROR_MALLOC, data, 0);
+	data->map[1] = 0;
+	data->map[2] = 0;
+	data->map[0] = malloc(sizeof(char **) * (data->lst_map.y + 1));
+	if (!data->map[0])
+		clear_exit(1, "(1)" ERROR_MALLOC, data, 0);
+	data->map[1] = malloc(sizeof(char **) * (data->lst_map.y + 1));
+	if (!data->map[1])
+		clear_exit(1, "(2)" ERROR_MALLOC, data, 0);
+	data->map[0][(data->lst_map.y)] = 0;
+	data->map[1][(data->lst_map.y)] = 0;
+}
+
 void	search_path(t_data *data)
 {
 	char	*line;
@@ -71,17 +88,37 @@ void	search_path(t_data *data)
 	}
 	ensure_preloading_map(data);
 	search_map(data, line);
-	data->map = malloc(sizeof(char ***) * (data->lst_map.y + 1));
-	if (!data->map)
-		clear_exit(1, "(1)" ERROR_MALLOC, data, 0);
 	data->fd = close(data->fd);
+	init_map(data);
+}
+
+void	set_map(t_data *data)
+{
+	size_t	i;
+	t_lst	*node;
+
+	i = -1;
+	node = data->lst_map.start;
+	while (++i < data->lst_map.y)
+	{
+		data->map[0][i] = ft_strndup(node->str + \
+data->lst_map.min, data->lst_map.x - data->lst_map.min);
+		if (!data->map[0][i])
+			clear_exit(1, "(3)" ERROR_MALLOC, data, 0);
+		data->map[1][i] = ft_strndup(node->str + \
+data->lst_map.min, data->lst_map.x - data->lst_map.min);
+		if (!data->map[1][i])
+			clear_exit(1, "(4)" ERROR_MALLOC, data, 0);
+		node = node->next;
+	}
+	data->map[0][i] = 0;
+	data->map[1][i] = 0;
 }
 
 void	parsing(const char *path, t_data *data)
 {
 	size_t	len;
-	size_t	i;
-	t_lst	*node;
+
 
 	len = ft_strlen(path);
 	if (len < 5 || ft_strcmp((char *) &path[len - 4], ".cub") != 0)
@@ -91,15 +128,7 @@ void	parsing(const char *path, t_data *data)
 		clear_exit(1, "2: " ERROR_PATH_MAP, 0, 0);
 	set_data(data);
 	search_path(data);
-	i = -1;
-	node = data->lst_map.start;
-	while (++i < data->lst_map.y)
-	{
-		data->map[i] = ft_strndup(node->str + \
-data->lst_map.min, data->lst_map.x - data->lst_map.min);
-		node = node->next;
-	}
-	data->map[i] = 0;
+	set_map(data);
 	data->lst_map.start = clear_lst(data);
 	pars_map(data);
 }

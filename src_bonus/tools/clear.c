@@ -6,26 +6,32 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 16:06:15 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/09 03:32:38 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/09 04:01:45 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-void	free_tab(char **tab)
+void	free_tab(char ***tab)
 {
 	int	i;
+	int	j;
 
 	if (!tab)
 		return ;
-	i = 0;
-	while (tab[i])
+	i = -1;
+	while (tab[++i])
 	{
+		j = -1;
+		while (tab[i][++j])
+			free(tab[i][j]);
 		free(tab[i]);
-		i++;
+		tab[i] = NULL;
 	}
 	free(tab);
+	tab = NULL;
 }
+
 
 t_lst	*clear_lst(t_data *data)
 {

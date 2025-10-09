@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:09:54 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/09 03:40:24 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/09 04:38:11 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ void	search_map(t_data *data, char *line)
 
 void	look_neighbor(t_data *data, int x, int y)
 {
-	if (x - 1 < 0 || check_is_void(data->map[y][x - 1]))
+	if (x - 1 < 0 || check_is_void(data->map[0][y][x - 1]))
 		clear_exit(1, "(6)" ERROR_MAP, data, 0);
-	if (x + 1 > (int) data->lst_map.x - 1 || check_is_void(data->map[y][x + 1]))
+	if (x + 1 > (int) data->lst_map.x - 1 || check_is_void(data->map[0][y][x + 1]))
 		clear_exit(1, "(7)" ERROR_MAP, data, 0);
-	if (y - 1 < 0 || check_is_void(data->map[y - 1][x]))
+	if (y - 1 < 0 || check_is_void(data->map[0][y - 1][x]))
 		clear_exit(1, "(8)" ERROR_MAP, data, 0);
-	if (y + 1 > (int) data->lst_map.y - 1 || check_is_void(data->map[y + 1][x]))
+	if (y + 1 > (int) data->lst_map.y - 1 || check_is_void(data->map[0][y + 1][x]))
 		clear_exit(1, "(9)" ERROR_MAP, data, 0);
 }
 
@@ -77,12 +77,15 @@ void	pars_map(t_data *data)
 	while (++y < (int) data->lst_map.y)
 	{
 		x = -1;
-		while (data->map[y][++x])
+		while (data->map[0][y][++x])
 		{
-			if (check_is_edge(data->map[y][x]))
+			if (check_is_edge(data->map[0][y][x]))
 				look_neighbor(data, x, y);
-			if (check_is_spawn(data->map[y][x]))
+			if (check_is_spawn(data->map[0][y][x]))
 				++spawn;
+			data->map[1][y][x] = 0;
+			if (data->map[0][y][x] == 'C')
+				data->map[1][y][x] = -1;
 			if (spawn > 1)
 				clear_exit(1, "(4)" ERROR_MAP, data, 0);
 		}

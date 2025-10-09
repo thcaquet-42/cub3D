@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:14:30 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/09 03:40:24 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/09 03:43:21 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@ float	init_player_pos(t_data *data)
 	int		j;
 
 	i = 0;
-	while (data->map[i])
+	while (data->map[0][i])
 	{
 		j = 0;
-		while (data->map[i][j])
+		while (data->map[0][i][j])
 		{
 			data->plr.pos.y = i + 0.5;
 			data->plr.pos.x = j + 0.5;
-			if (data->map[i][j] == 'E')
+			if (data->map[0][i][j] == 'E')
 				return (0.0001 + 0);
-			else if (data->map[i][j] == 'N')
+			else if (data->map[0][i][j] == 'N')
 				return (0.0001 + PI2 * 3);
-			else if (data->map[i][j] == 'S')
+			else if (data->map[0][i][j] == 'S')
 				return (0.0001 + PI2);
-			else if (data->map[i][j] == 'W')
+			else if (data->map[0][i][j] == 'W')
 				return (0.0001 + PI);
 			j++;
 		}

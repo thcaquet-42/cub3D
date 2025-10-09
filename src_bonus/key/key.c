@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:51:03 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/09 03:40:24 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/09 03:43:21 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	check_edge(t_data *data, float in_x, float in_y)
 
 	nin_x = in_x + data->plr.pos.x;
 	nin_y = in_y + data->plr.pos.y;
-	if (check_is_walkable(data->map[(int) floor(data->plr.pos.y)]\
+	if (check_is_walkable(data->map[0][(int) floor(data->plr.pos.y)]\
 [(int) floor(nin_x)]))
 		data->plr.pos.x = nin_x;
-	if (check_is_walkable(data->map[(int) floor(nin_y)][(int)\
+	if (check_is_walkable(data->map[0][(int) floor(nin_y)][(int)\
 floor(data->plr.pos.x)]))
 		data->plr.pos.y = nin_y;
 }

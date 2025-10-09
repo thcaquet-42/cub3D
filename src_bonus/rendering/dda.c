@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 02:40:25 by jaineko           #+#    #+#             */
-/*   Updated: 2025/10/09 03:40:24 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/09 03:43:21 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ void	get_door(t_data *data, t_dda *dda, int *x)
 {
 	if (data->t_key.door && *x == WIDTH / 2)
 	{
-	if (data->map[dda->map.y][dda->map.x] == 'D')
-		data->map[dda->map.y][dda->map.x] = 'C';
-	else if (data->map[dda->map.y][dda->map.x] == 'C')
-		data->map[dda->map.y][dda->map.x] = 'D';
+	if (data->map[0][dda->map.y][dda->map.x] == 'D')
+		data->map[0][dda->map.y][dda->map.x] = 'C';
+	else if (data->map[0][dda->map.y][dda->map.x] == 'C')
+		data->map[0][dda->map.y][dda->map.x] = 'D';
 	data->t_key.door = 0;
 	}
 	if (!dda->door.is)
@@ -119,9 +119,9 @@ void	dda_wall(t_data *data, t_dda *dda, int *x)
 			dda->map.y += dda->step.y;
 			dda->side = 1;
 		}
-		if (check_is_door(data->map[dda->map.y][dda->map.x]))
+		if (check_is_door(data->map[0][dda->map.y][dda->map.x]))
 			get_door(data, dda, x);
-		if (check_is_wall(data->map[dda->map.y][dda->map.x]))
+		if (check_is_wall(data->map[0][dda->map.y][dda->map.x]))
 			break ;
 	}
 }

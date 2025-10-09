@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:04:08 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/09 02:45:39 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/09 03:43:21 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	draw_map(t_data *data)
 		i.x = 0;
 		while (i.x < MAP_X)
 		{
-			if (data->map[i.y * s_y / MAP_Y][i.x * s_x / MAP_X] == '1')
+			if (data->map[0][i.y * s_y / MAP_Y][i.x * s_x / MAP_X] == '1')
 				data->buf[i_map + i.x] = COLOR_EDGE;
-			else if (check_is_edge(data->map[i.y * s_y / MAP_Y][i.x * s_x / MAP_X]))
+			else if (check_is_edge(data->map[0][i.y * s_y / MAP_Y][i.x * s_x / MAP_X]))
 				data->buf[i_map + i.x] = color;
 			++i.x;
 		}
