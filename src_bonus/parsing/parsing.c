@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 19:11:41 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/10 19:58:39 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/11 20:40:38 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,11 @@ void	set_map(t_data *data)
 	node = data->lst_map.start;
 	while (++i < data->lst_map.y)
 	{
-		data->map[0][i] = ft_strndup(node->str + \
+		data->map[0][i] = (unsigned char *) ft_strndup(node->str + \
 data->lst_map.min, data->lst_map.x - data->lst_map.min);
 		if (!data->map[0][i])
 			clear_exit(1, "(3)" ERROR_MALLOC, data, 0);
-		data->map[1][i] = ft_strndup(node->str + \
+		data->map[1][i] = (unsigned char *) ft_strndup(node->str + \
 data->lst_map.min, data->lst_map.x - data->lst_map.min);
 		if (!data->map[1][i])
 			clear_exit(1, "(4)" ERROR_MALLOC, data, 0);

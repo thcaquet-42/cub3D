@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 16:06:15 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/09 04:01:45 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/11 20:41:17 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-void	free_tab(char ***tab)
+void	free_tab(unsigned char ***tab)
 {
 	int	i;
 	int	j;
@@ -31,7 +31,6 @@ void	free_tab(char ***tab)
 	free(tab);
 	tab = NULL;
 }
-
 
 t_lst	*clear_lst(t_data *data)
 {
@@ -59,7 +58,7 @@ void	clear_data(t_data *data)
 		return ;
 	clear_lst(data);
 	i = -1;
-	while (++i < 5)
+	while (++i < 6)
 	{
 		if (data->tex[i].img)
 		{

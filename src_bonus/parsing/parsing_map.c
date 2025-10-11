@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:09:54 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/11 04:24:35 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/11 20:35:07 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	pars_map(t_data *data)
 				++spawn;
 			data->map[1][y][x] = 0;
 			if (data->map[0][y][x] == 'D')
-				data->map[1][y][x] = 125;
+				data->map[1][y][x] = 144;
 			if (spawn > 1)
 				clear_exit(1, "(4)" ERROR_MAP, data, 0);
 		}

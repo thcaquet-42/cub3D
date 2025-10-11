@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:04:17 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/10 16:18:59 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/11 20:43:25 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,29 @@ void	print_fps(t_data *data)
 	tim_us = tv.tv_usec;
 }
 
+void	loop_door(t_data *data)
+{
+	t_pointi		max;
+	t_pointi		i;
+	int				tick;
+
+	max.x = data->lst_map.x;
+	max.y = data->lst_map.y;
+	i.y = -1;
+	tick = tool_tick();
+	while (tick && ++i.y < max.y)
+	{
+		i.x= 0;
+		while (++i.x < max.x)
+		{
+			if (tick && data->map[0][i.y][i.x] == 'D' && data->map[1][i.y][i.x] < 144)
+				data->map[1][i.y][i.x] += 8;
+			if (tick && data->map[0][i.y][i.x] == 'C' && data->map[1][i.y][i.x] > 0)
+				data->map[1][i.y][i.x] -= 8;
+		}
+	}
+}
+
 int	game_loop(void *arg)
 {
 	t_data		*data;
@@ -45,6 +68,7 @@ int	game_loop(void *arg)
 	data = (t_data *)arg;
 	key_hook(data);
 	draw_wall(data);
+	loop_door(data);
 	if (data->t_key.map)
 	{
 		draw_compass(data);

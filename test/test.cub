@@ -1,8 +1,8 @@
-NO test/Wattaaa.xpm
-SO test/aaa.xpm
+NO test/hy.xpm
+SO test/hy.xpm
 F           0,200,0
-EA test/hell.xpm
-WE test/hmmmm.xpm
+EA test/hy.xpm
+WE test/hy.xpm
 
 C 150,100,255
 

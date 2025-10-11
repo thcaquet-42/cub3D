@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:26:23 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/11 17:47:35 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/11 20:54:20 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,28 +199,28 @@ typedef struct s_toggle
 
 typedef struct s_data
 {
-	void		*mlx;
-	void		*win;
-	void		*img;
-	uint32_t	*buf;
-	t_vec		plr;
-	t_point		cam;
-	char		***map;
-	int			scrn_x;
-	int			scrn_y;
-	t_tex		tex[6];
-	t_color		rgb[2];
-	t_tail		lst_map;
-	int			fd;
-	int			keys;
-	t_toggle	t_key;
+	void			*mlx;
+	void			*win;
+	void			*img;
+	uint32_t		*buf;
+	t_vec			plr;
+	t_point			cam;
+	unsigned char	***map;
+	int				scrn_x;
+	int				scrn_y;
+	t_tex			tex[6];
+	t_color			rgb[2];
+	t_tail			lst_map;
+	int				fd;
+	int				keys;
+	t_toggle		t_key;
 }	t_data;
 
 // tools 
 uint32_t	tool_rgba(int r, int g, int b, int a);
 uint32_t	tool_rev(t_color *color);
 uint32_t	tool_gray(t_color *color);
-int			tool_tick(int i);
+int			tool_tick(void);
 
 // clear
 void		clear_exit(int nb_exit, char *str, t_data *data, void *thing);
@@ -239,6 +239,7 @@ int			check_is_walkable(int c);
 int			check_is_edge(int c);
 int			check_is_door(int c);
 int			check_is_wall(int c);
+int			check_enable_door(t_data *data, t_dda *dda, int *x);
 
 // key
 int			key_hook_press(int key, void *v_data);
