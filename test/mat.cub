@@ -1,8 +1,8 @@
-NO test/wat.xpm
-SO test/hy.xpm
+NO test/brick_wall.xpm
+SO test/brick_wall.xpm
 F           233,233,233
-EA test/rrrr.xpm
-WE test/hehe.xpm
+EA test/brick_wall.xpm
+WE test/brick_wall.xpm
 
 C 100,100,100
 
@@ -14,6 +14,6 @@ C 100,100,100
 100000000100E01
 100010000111111
 1000000001
-1CCCCCCCC1
+1111111C11
 1000000001
 1111111111

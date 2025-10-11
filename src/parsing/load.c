@@ -45,21 +45,23 @@ void	load_tex_bis(char *line, char *path, t_data *data, int dir)
 {
 	int		null;
 
-	data->tex[dir].img = mlx_xpm_file_to_image(data->mlx, path, &data->tex[dir].width, &data->tex[dir].height);
+	data->tex[dir].img = mlx_xpm_file_to_image(data->mlx, path,
+			&data->tex[dir].width, &data->tex[dir].height);
 	free(path);
 	if (data->tex[dir].img == 0)
 		clear_exit(1, "(2)"ERROR_LOAD_TEX, data, line);
-	data->tex[dir].buf = (uint32_t *)mlx_get_data_addr(data->tex[dir].img, &null, &data->tex[dir].size_w, &null);
+	data->tex[dir].buf = (uint32_t *)mlx_get_data_addr(data->tex[dir].img,
+			&null, &data->tex[dir].size_w, &null);
 	if (data->tex[dir].buf == 0)
 		clear_exit(1, "(3)"ERROR_LOAD_TEX, data, line);
-	data->tex[dir].size_w /= sizeof(data->tex[dir].size_w);	
+	data->tex[dir].size_w /= sizeof(data->tex[dir].size_w);
 }
 
 void	load_tex(char *line, int len, t_data *data, int dir)
 {
 	int		i;
 	char	*path;
-	
+
 	i = 3;
 	while (line[i] == ' ')
 		++i;
@@ -71,5 +73,5 @@ void	load_tex(char *line, int len, t_data *data, int dir)
 	else
 		clear_exit(1, ERROR_MULTI_TEX, data, line);
 	if (data->tex[dir].img == 0)
-		clear_exit(1, "(4)"ERROR_LOAD_TEX, data,line);
+		clear_exit(1, "(4)"ERROR_LOAD_TEX, data, line);
 }
