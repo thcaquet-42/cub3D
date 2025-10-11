@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:14:30 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/09 03:43:21 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/11 16:16:17 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int mouse_move_hook(int x, int y, t_data *data)
 	{
 		if (x != WIDTH / 2)
 		{
-			data->plr.teta += (x - WIDTH / 2) * 0.0001;
+			data->plr.teta += (x - WIDTH / 2) * 0.0003;
 			data->plr.dir.x = cos(data->plr.teta);
 			data->plr.dir.y = sin(data->plr.teta);
 			mlx_mouse_move(data->mlx, data->win, WIDTH / 2, HEIGHT / 2);

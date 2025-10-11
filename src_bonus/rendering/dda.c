@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 02:40:25 by jaineko           #+#    #+#             */
-/*   Updated: 2025/10/11 04:29:33 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/11 17:44:50 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,25 @@ void	dda_door(t_data *data, t_dda *dda, t_door *door)
 	door->map.y = dda->map.y;
 }
 
+int		check_enable_door(t_data *data, t_dda *dda, int *x)
+{
+	float	wall_dist;
+	
+	if (!data->t_key.door)
+		return (0);
+	if (dda->side == 0)
+		wall_dist = dda->side_dist.x - dda->delta_dist.x;
+	else
+		wall_dist = dda->side_dist.y - dda->delta_dist.y;
+	return (wall_dist <= 1 && (*x <= WIDTH / 2 + 50 && *x >= WIDTH / 2 - 50));
+}
+
 void	get_door(t_data *data, t_dda *dda, int *x)
 {
 	unsigned char	*state;
 	int				tick;
 
-	if (data->t_key.door && *x == WIDTH / 2)
+	if (check_enable_door(data, dda, x))
 	{
 		if (data->map[0][dda->map.y][dda->map.x] == 'D')
 			data->map[0][dda->map.y][dda->map.x] = 'C';
@@ -105,12 +118,12 @@ void	get_door(t_data *data, t_dda *dda, int *x)
 			dda->door.wall_dist = dda->side_dist.y - dda->delta_dist.y;
 		dda_door(data, dda, &dda->door);
 		state = (unsigned char *) &data->map[1][dda->map.y][dda->map.x];
-		tick = tool_tick(0);
-		if (tick && data->map[0][dda->map.y][dda->map.x] == 'D' && *state < 125)
-			*state += 1;
-		if (tick && data->map[0][dda->map.y][dda->map.x] == 'C' && *state > 0)
-			*state -= 1;
 	}
+	tick = tool_tick(0);
+	if (tick && data->map[0][dda->map.y][dda->map.x] == 'D' && *state < 125)
+		*state += 1;
+	if (tick && data->map[0][dda->map.y][dda->map.x] == 'C' && *state > 0)
+		*state -= 1;
 }
 
 void	dda_wall(t_data *data, t_dda *dda, int *x)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools0.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 17:34:10 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/11 04:35:17 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/11 17:46:15 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		tool_tick(int i)
 	static struct timeval	old_tv[2] = (struct timeval[2]) {0};
 
 	gettimeofday(&tv, NULL);
-	if (tv.tv_sec > old_tv[i].tv_sec || tv.tv_usec > old_tv[i].tv_usec + 2000 + i * 8000)
+	if (tv.tv_sec > old_tv[i].tv_sec || tv.tv_usec > old_tv[i].tv_usec + 4000 + i * 8000)
 	{
 		old_tv[i] = tv;
 		return (1);
