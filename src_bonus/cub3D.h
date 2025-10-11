@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:26:23 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/09 03:41:31 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/11 04:29:22 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define WE 2
 # define EA 3
 # define COMPASS 4
+# define DOOR 5
 # define F 0
 # define C 1
 
@@ -119,9 +120,10 @@ typedef struct s_draw_tex
 	int			start;
 	int			end;
 	int			tex_y;
+	int			tex_x;
 	int			tex_w;
 	int			tex_h;
-	uint32_t	dst;
+	int			dst;
 }	t_draw_tex;
 
 typedef struct s_door
@@ -134,7 +136,6 @@ typedef struct s_door
 	t_point			ray_dir;
 	float			wall_dist;
 	int				line_height;
-	char			side : 1;
 	int				start;
 	int				end;
 	int				tex_x;
@@ -207,7 +208,7 @@ typedef struct s_data
 	char		***map;
 	int			scrn_x;
 	int			scrn_y;
-	t_tex		tex[5];
+	t_tex		tex[6];
 	t_color		rgb[2];
 	t_tail		lst_map;
 	int			fd;
@@ -219,6 +220,7 @@ typedef struct s_data
 uint32_t	tool_rgba(int r, int g, int b, int a);
 uint32_t	tool_rev(t_color *color);
 uint32_t	tool_gray(t_color *color);
+int			tool_tick(int i);
 
 // clear
 void		clear_exit(int nb_exit, char *str, t_data *data, void *thing);

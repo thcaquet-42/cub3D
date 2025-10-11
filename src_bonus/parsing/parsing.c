@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 19:11:41 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/09 05:05:52 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/10 19:58:39 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ int	chek_path(char *line, int len, t_data *data)
 
 void	ensure_preloading_map(t_data *data)
 {
+	load_tex_bis(0, ft_strdup("src_bonus/tex/door.xpm"), data, DOOR);
+	if (!data->tex[DOOR].buf && data->tex[DOOR].height == 500
+		&& data->tex[DOOR].width == 500)
+		clear_exit(1, "(5)" ERROR_LOAD_TEX, data, 0);
 	load_tex_bis(0, ft_strdup("src_bonus/tex/compass.xpm"), data, COMPASS);
 	if (!data->tex[COMPASS].buf && data->tex[COMPASS].height == 200
 		&& data->tex[COMPASS].width == 200)

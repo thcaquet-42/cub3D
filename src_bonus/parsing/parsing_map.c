@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 20:09:54 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/09 04:38:11 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/11 04:24:35 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void	pars_map(t_data *data)
 			if (check_is_spawn(data->map[0][y][x]))
 				++spawn;
 			data->map[1][y][x] = 0;
-			if (data->map[0][y][x] == 'C')
-				data->map[1][y][x] = -1;
+			if (data->map[0][y][x] == 'D')
+				data->map[1][y][x] = 125;
 			if (spawn > 1)
 				clear_exit(1, "(4)" ERROR_MAP, data, 0);
 		}

@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:04:08 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/09 03:43:21 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/11 03:59:58 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	draw_vec(t_data *data, float teta, const uint32_t gray, const uint32_t rev)
 	dst = (j.y * WIDTH) + (WIDTH - MAP_X + j.x);
 	while (++i && dst > 0 && j.x < MAP_X && j.y < MAP_Y)
 	{
-		if ((data->buf[dst] != rev && (data->buf[dst] != gray)))
+		if ((data->buf[dst] != rev && (data->buf[dst] != gray)) && (i > 3))
 		{
 			data->buf[dst] = COLOR_G;
 			break ;

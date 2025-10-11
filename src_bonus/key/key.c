@@ -6,7 +6,7 @@
 /*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:51:03 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/09 03:43:21 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/11 04:31:10 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,24 @@ floor(data->plr.pos.x)]))
 
 void	key_hook(t_data *data)
 {
-	if (data->keys & BKEY_W)
-		check_edge(data, 0.1 * cos(data->plr.teta), 0.1 * sin(data->plr.teta));
-	if (data->keys & BKEY_S)
-		check_edge(data, -.1 * cos(data->plr.teta), -0.1 * sin(data->plr.teta));
-	if (data->keys & BKEY_A)
-		check_edge(data, 0.1 * sin(data->plr.teta), -0.1 * cos(data->plr.teta));
-	if (data->keys & BKEY_D)
-		check_edge(data, -0.1 * sin(data->plr.teta), 0.1 * cos(data->plr.teta));
-	if (data->keys & BKEY_LEFT)
+	int	bool;
+
+	bool = tool_tick(1);
+	if (bool && data->keys & BKEY_W)
+		check_edge(data, 0.05 * cos(data->plr.teta), 0.05 * sin(data->plr.teta));
+	if (bool && data->keys & BKEY_S)
+		check_edge(data, -0.05 * cos(data->plr.teta), -0.05 * sin(data->plr.teta));
+	if (bool && data->keys & BKEY_A)
+		check_edge(data, 0.05 * sin(data->plr.teta), -0.05 * cos(data->plr.teta));
+	if (bool && data->keys & BKEY_D)
+		check_edge(data, -0.05 * sin(data->plr.teta), 0.05 * cos(data->plr.teta));
+	if (bool && data->keys & BKEY_LEFT)
 	{
 		data->plr.teta -= 0.08;
 		data->plr.dir.x = cos(data->plr.teta);
 		data->plr.dir.y = sin(data->plr.teta);
 	}
-	if (data->keys & BKEY_RIGHT)
+	if (bool && data->keys & BKEY_RIGHT)
 	{
 		data->plr.teta += 0.08;
 		data->plr.dir.x = cos(data->plr.teta);
