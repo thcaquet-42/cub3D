@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 19:11:41 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/11 20:40:38 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/20 19:19:24 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,24 @@ int	chek_path(char *line, int len, t_data *data)
 void	ensure_preloading_map(t_data *data)
 {
 	load_tex_bis(0, ft_strdup("src_bonus/tex/door.xpm"), data, DOOR);
-	if (!data->tex[DOOR].buf && data->tex[DOOR].height == 500
-		&& data->tex[DOOR].width == 500)
-		clear_exit(1, "(5)" ERROR_LOAD_TEX, data, 0);
+	if (!data->tex[DOOR].buf)
+		clear_exit(1, "(DOOR)" ERROR_LOAD_TEX, data, 0);
 	load_tex_bis(0, ft_strdup("src_bonus/tex/compass.xpm"), data, COMPASS);
 	if (!data->tex[COMPASS].buf && data->tex[COMPASS].height == 200
 		&& data->tex[COMPASS].width == 200)
-		clear_exit(1, "(5)" ERROR_LOAD_TEX, data, 0);
+		clear_exit(1, "(COMPASS)" ERROR_LOAD_TEX, data, 0);
 	if (!data->tex[NO].buf)
-		clear_exit(1, "(6)" ERROR_LOAD_TEX, data, 0);
+		clear_exit(1, "(NO)" ERROR_LOAD_TEX, data, 0);
 	if (!data->tex[SO].buf)
-		clear_exit(1, "(7)" ERROR_LOAD_TEX, data, 0);
+		clear_exit(1, "(SO)" ERROR_LOAD_TEX, data, 0);
 	if (!data->tex[WE].buf)
-		clear_exit(1, "(8)" ERROR_LOAD_TEX, data, 0);
+		clear_exit(1, "(WE)" ERROR_LOAD_TEX, data, 0);
 	if (!data->tex[EA].buf)
-		clear_exit(1, "(9)" ERROR_LOAD_TEX, data, 0);
+		clear_exit(1, "(EA)" ERROR_LOAD_TEX, data, 0);
 	if (data->rgb[F].r == -1)
 		clear_exit(1, "(4)" ERROR_RGB, data, 0);
 	if (data->rgb[C].r == -1)
-		clear_exit(1, "(4)" ERROR_RGB, data, 0);
+		clear_exit(1, "(5)" ERROR_RGB, data, 0);
 }
 
 void	init_map(t_data *data)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:04:17 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/11 20:43:25 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/20 18:23:41 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	loop_door(t_data *data)
 	max.x = data->lst_map.x;
 	max.y = data->lst_map.y;
 	i.y = -1;
-	tick = tool_tick();
+	tick = tool_tick(1);
 	while (tick && ++i.y < max.y)
 	{
 		i.x= 0;

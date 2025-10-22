@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:51:03 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/11 20:31:18 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/20 18:23:36 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	key_hook(t_data *data)
 {
 	int	bool;
 
-	bool = tool_tick();
+	bool = tool_tick(0);
 	if (bool && data->keys & BKEY_W)
 		check_edge(data, 0.1 * cos(data->plr.teta), 0.1 * sin(data->plr.teta));
 	if (bool && data->keys & BKEY_S)

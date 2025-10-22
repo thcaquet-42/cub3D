@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools0.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 17:34:10 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/11 20:53:06 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/20 18:24:02 by jaineko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ uint32_t	tool_rev(t_color *color)
 	return (255 << 24 | (255 - color->r) << 16 | (255 - color->g) << 8 | (255 - color->b));
 }
 
-int		tool_tick(void)
+int		tool_tick(int	mod)
 {
 	struct timeval			tv;
-	static struct timeval	old_tv = (struct timeval) {0};
+	static struct timeval	old_tv[2] = (struct timeval[2] ) {0};
 
 	gettimeofday(&tv, NULL);
-	if (tv.tv_sec > old_tv.tv_sec || tv.tv_usec > old_tv.tv_usec + 4000)
+	if (tv.tv_sec > old_tv[mod].tv_sec || tv.tv_usec > old_tv[mod].tv_usec + 4000)
 	{
-		old_tv = tv;
+		old_tv[mod] = tv;
 		return (1);
 	}
 	return (0);
