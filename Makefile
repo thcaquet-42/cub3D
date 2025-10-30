@@ -64,7 +64,8 @@ LIB			= $(LIB_PATH)/libft.a
 CFLAGS		= -Werror -Wextra -Wall -g
 LDFLAGS		= -I $(LIB_PATH)/ 
 
-MLX_LIB 	= minilibx-linux/libmlx_Linux.a
+MLX_PATH	= minilibx-linux
+MLX_LIB 	= $(MLX_PATH)/libmlx_Linux.a
 
 $(NAME): $(OBJ)
 	cc $(CFLAGS) $(OBJ) $(LIB) $(MLX_LIB) -lX11 -lXext -lm -o $(NAME)
@@ -74,6 +75,7 @@ $(NAME_B): $(OBJ_B)
 
 $(LIB):
 	make -sC $(LIB_PATH)
+	make -sC $(MLX_PATH)
 
 %.o: %.c
 	cc $(CFLAGS) -c -o $@ $^ $(LDFLAGS)
@@ -94,4 +96,6 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+lib: $(LIB)
+
+.PHONY: all clean fclean re bonus lib

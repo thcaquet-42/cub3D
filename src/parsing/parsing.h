@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 17:17:07 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/06 17:17:11 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/30 15:16:30 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,8 @@ void	parsing(const char *path, t_data *data);
 void	search_map(t_data *data, char *line);
 void	pars_map(t_data *data);
 
-// load 
-
 void	load_colors(char *line, int i, t_data *data, int color);
 void	load_tex(char *line, int len, t_data *data, int cardinal);
-
-// set
 
 void	set_data(t_data *data);
 

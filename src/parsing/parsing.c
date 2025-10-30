@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 19:11:41 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/09 03:30:01 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/30 13:49:18 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,13 @@ void	parsing(const char *path, t_data *data)
 	node = data->lst_map.start;
 	while (++i < data->lst_map.y)
 	{
-		data->map[i] = ft_strndup(node->str + \
-data->lst_map.min, data->lst_map.x - data->lst_map.min);
+		data->map[i] = ft_strndup(\
+node->str + data->lst_map.min, data->lst_map.x - data->lst_map.min);
+		data->map[i + 1] = 0;
+		if (!data->map[i])
+			clear_exit(1, ERROR_MALLOC, data, 0);
 		node = node->next;
 	}
-	data->map[i] = 0;
 	data->lst_map.start = clear_lst(data);
 	pars_map(data);
 }

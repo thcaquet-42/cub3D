@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 17:26:48 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/23 14:43:50 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/30 15:06:08 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,13 @@ void	set_map(t_data *data)
 	{
 		data->map[0][i] = (unsigned char *) ft_strndup(node->str + \
 data->lst_map.min, data->lst_map.x - data->lst_map.min);
+		data->map[0][i + 1] = 0;
+		data->map[1][i] = 0;
 		if (!data->map[0][i])
 			clear_exit(1, "(3)" ERROR_MALLOC, data, 0);
 		data->map[1][i] = (unsigned char *) ft_strndup(node->str + \
 data->lst_map.min, data->lst_map.x - data->lst_map.min);
+		data->map[1][i + 1] = 0;
 		if (!data->map[1][i])
 			clear_exit(1, "(4)" ERROR_MALLOC, data, 0);
 		node = node->next;

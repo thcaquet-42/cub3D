@@ -6,13 +6,13 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:51:03 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/23 14:46:11 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/30 14:43:11 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-void	check_edge(t_data *data, float in_x, float in_y)
+void	look_edge(t_data *data, float in_x, float in_y)
 {
 	float	nin_x;
 	float	nin_y;
@@ -33,13 +33,13 @@ void	key_hook(t_data *data)
 
 	bool = tool_tick(0);
 	if (bool && data->keys & BKEY_W)
-		check_edge(data, 0.1 * cos(data->plr.teta), 0.1 * sin(data->plr.teta));
+		look_edge(data, 0.1 * cos(data->plr.teta), 0.1 * sin(data->plr.teta));
 	if (bool && data->keys & BKEY_S)
-		check_edge(data, -0.1 * cos(data->plr.teta), -.1 * sin(data->plr.teta));
+		look_edge(data, -0.1 * cos(data->plr.teta), -.1 * sin(data->plr.teta));
 	if (bool && data->keys & BKEY_A)
-		check_edge(data, 0.1 * sin(data->plr.teta), -0.1 * cos(data->plr.teta));
+		look_edge(data, 0.1 * sin(data->plr.teta), -0.1 * cos(data->plr.teta));
 	if (bool && data->keys & BKEY_D)
-		check_edge(data, -0.1 * sin(data->plr.teta), 0.1 * cos(data->plr.teta));
+		look_edge(data, -0.1 * sin(data->plr.teta), 0.1 * cos(data->plr.teta));
 	if (bool && data->keys & BKEY_LEFT)
 	{
 		data->plr.teta -= 0.08;

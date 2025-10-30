@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:26:23 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/23 14:51:08 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/30 15:16:22 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,10 @@
 
 # include "../libft/libft.h"
 
-// lib pas sur de les garder la :
-
 # include <stdio.h>
 # include <string.h>
 # include <sys/time.h>
 # include <X11/Xutil.h>
-
-// a voir si ca reste ou pas
 
 # include "parsing/parsing.h"
 # include "../minilibx-linux/mlx.h"
@@ -152,39 +148,29 @@ typedef struct s_data
 	int			keys;
 }	t_data;
 
-// tools 
 uint32_t	tool_rgba(int r, int g, int b, int a);
 
-// clear
 void		clear_exit(int nb_exit, char *str, t_data *data, void *thing);
 void		clear_data(t_data *data);
 t_lst		*clear_lst(t_data *data);
 
-// lst
 void		lst_add_back(t_tail *tail, char *content, size_t n);
 t_tail		lst_set(void);
 
-// check
 int			check_is_void(int c);
 int			check_case_map(int c);
 int			check_is_spawn(int c);
 int			check_is_walkable(int c);
 
-// key
 int			key_hook_press(int key, void *v_data);
 int			key_hook_release(int key, void *v_data);
 void		key_hook(t_data *data);
 int			close_window(t_data *data);
 
-// =============================================
-
-// loop
 int			game_loop(void *arg);
 
-// draw
 void		draw_wall(t_data *data);
 
-//dda
 void		dda_alg(t_data *data, t_dda *dda, t_point plane, int x);
 void		check_dda_tex(t_data *data, t_dda *dda);
 
