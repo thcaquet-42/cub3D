@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 19:11:41 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/20 19:19:24 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/23 14:45:02 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,33 +95,9 @@ void	search_path(t_data *data)
 	init_map(data);
 }
 
-void	set_map(t_data *data)
-{
-	size_t	i;
-	t_lst	*node;
-
-	i = -1;
-	node = data->lst_map.start;
-	while (++i < data->lst_map.y)
-	{
-		data->map[0][i] = (unsigned char *) ft_strndup(node->str + \
-data->lst_map.min, data->lst_map.x - data->lst_map.min);
-		if (!data->map[0][i])
-			clear_exit(1, "(3)" ERROR_MALLOC, data, 0);
-		data->map[1][i] = (unsigned char *) ft_strndup(node->str + \
-data->lst_map.min, data->lst_map.x - data->lst_map.min);
-		if (!data->map[1][i])
-			clear_exit(1, "(4)" ERROR_MALLOC, data, 0);
-		node = node->next;
-	}
-	data->map[0][i] = 0;
-	data->map[1][i] = 0;
-}
-
 void	parsing(const char *path, t_data *data)
 {
 	size_t	len;
-
 
 	len = ft_strlen(path);
 	if (len < 5 || ft_strcmp((char *) &path[len - 4], ".cub") != 0)

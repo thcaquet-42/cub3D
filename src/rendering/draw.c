@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:04:08 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/06 19:33:24 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/23 14:51:08 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	draw_wall(t_data *data)
 	while (++i.x < WIDTH)
 	{
 		dda_alg(data, &dda, plane, i.x);
-		dda_choose_tex(data, &dda);
+		check_dda_tex(data, &dda);
 		if (dda.side == 0)
 			dda.wall_x = data->plr.pos.y + dda.wall_dist * dda.ray_dir.y;
 		else

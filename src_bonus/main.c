@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 19:14:30 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/11 16:16:17 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/23 14:36:43 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	init_all(t_data *data, char **av)
 	data->t_key.mous = 1;
 }
 
-int mouse_move_hook(int x, int y, t_data *data)
+int	mouse_move_hook(int x, int y, t_data *data)
 {
 	if (data->t_key.mous)
 	{

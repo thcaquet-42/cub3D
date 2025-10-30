@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:26:23 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/20 18:23:17 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/23 14:55:33 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,10 @@
 
 # include "../libft/libft.h"
 
-// lib pas sur de les garder la :
-
 # include <stdio.h>
 # include <string.h>
 # include <sys/time.h>
 # include <X11/Xutil.h>
-
-// a voir si ca reste ou pas
 
 # include "parsing/parsing.h"
 # include "../minilibx-linux/mlx.h"
@@ -43,15 +39,11 @@
 # define F 0
 # define C 1
 
-# define MAP_X 200
-# define MAP_Y 200
+# define MAPX 200
+# define MAPY 200
 
 # define WIDTH 1920
 # define HEIGHT 1080
-// # define WIDTH 1600
-// # define HEIGHT 900
-// # define WIDTH 1280
-// # define HEIGHT 800
 
 # define BKEY_W 1
 # define BKEY_A 2
@@ -69,7 +61,7 @@
 # define PI32 0.09817477
 # define PI42 0.074799825
 
-# define FOV 1 // 0.57735026919
+# define FOV 1
 # define S 1000000
 
 # define COLOR_EDGE 10
@@ -77,7 +69,6 @@
 # define COLOR_G 65280
 # define COLOR_B 255
 # define COLOR_A 4278190080
-
 
 typedef struct s_color
 {
@@ -145,7 +136,6 @@ typedef struct s_door
 	float			tex_pos;
 	t_tex			*tex;
 }	t_door;
-
 
 typedef struct s_dda
 {
@@ -216,51 +206,41 @@ typedef struct s_data
 	t_toggle		t_key;
 }	t_data;
 
-// tools 
 uint32_t	tool_rgba(int r, int g, int b, int a);
 uint32_t	tool_rev(t_color *color);
 uint32_t	tool_gray(t_color *color);
 int			tool_tick(int mod);
 
-// clear
 void		clear_exit(int nb_exit, char *str, t_data *data, void *thing);
 void		clear_data(t_data *data);
 t_lst		*clear_lst(t_data *data);
 
-// lst
 void		lst_add_back(t_tail *tail, char *content, size_t n);
 t_tail		lst_set(void);
 
-// check
 int			check_is_void(int c);
 int			check_case_map(int c);
 int			check_is_spawn(int c);
 int			check_is_walkable(int c);
-int			check_is_edge(int c);
+int			check_edge(int c);
 int			check_is_door(int c);
 int			check_is_wall(int c);
 int			check_enable_door(t_data *data, t_dda *dda, int *x);
 
-// key
 int			key_hook_press(int key, void *v_data);
 int			key_hook_release(int key, void *v_data);
 void		key_hook(t_data *data);
 int			close_window(t_data *data);
 
-// =============================================
-
-// loop
 int			game_loop(void *arg);
 
-// draw
 void		draw_map(t_data	*data);
 void		draw_player(t_data *data);
 void		draw_wall(t_data *data);
 void		draw_compass(t_data *data);
 void		draw_door(t_data *data, t_door *door, t_pointi i);
 
-//dda
 void		dda_alg(t_data *data, t_dda *dda, t_point plane, int x);
-void		dda_choose_tex(t_data *data, t_dda *dda);
+void		check_dda_tex(t_data *data, t_dda *dda);
 
 #endif

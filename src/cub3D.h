@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:26:23 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/10/07 03:46:48 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/23 14:51:08 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,6 @@ void		draw_wall(t_data *data);
 
 //dda
 void		dda_alg(t_data *data, t_dda *dda, t_point plane, int x);
-void		dda_choose_tex(t_data *data, t_dda *dda);
+void		check_dda_tex(t_data *data, t_dda *dda);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 02:40:25 by jaineko           #+#    #+#             */
-/*   Updated: 2025/10/06 17:11:45 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/23 14:51:08 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-void	dda_choose_tex(t_data *data, t_dda *dda)
+void	check_dda_tex(t_data *data, t_dda *dda)
 {
 	if (dda->side == 0)
 	{

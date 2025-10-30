@@ -6,7 +6,7 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:04:08 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/11 21:00:39 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/23 14:56:32 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ void	draw_compass(t_data *data)
 		{
 			r.x = (int)(cos_a * (i.x - 100) - sin_a * (i.y - 100) + 100);
 			r.y = (int)(sin_a * (i.x - 100) + cos_a * (i.y - 100) + 100);
-			if ((r.x >= 0 && r.x < 200 && r.y >= 0 && r.y < 200) && (data->tex[COMPASS].buf[r.y * 200 + r.x] != 0))
-				data->buf[(i.y) * WIDTH + (WIDTH - 410 + i.x)] = data->tex[COMPASS].buf[r.y * 200 + r.x];
+			if ((r.x >= 0 && r.x < 200 && r.y >= 0 && r.y < 200) \
+&& (data->tex[COMPASS].buf[r.y * 200 + r.x] != 0))
+				data->buf[(i.y) * WIDTH + (WIDTH - 410 + i.x)] = \
+data->tex[COMPASS].buf[r.y * 200 + r.x];
 		}
 	}
 }
@@ -40,22 +42,22 @@ void	draw_map(t_data *data)
 	t_pointu	i;
 	uint32_t	i_map;
 	uint32_t	color;
-	size_t		s_x;
-	size_t		s_y;
+	size_t		sx;
+	size_t		sy;
 
-	i_map = (WIDTH - MAP_X);
+	i_map = (WIDTH - MAPX);
 	i.y = 0;
-	s_x = data->lst_map.x;
-	s_y = data->lst_map.y;
+	sx = data->lst_map.x;
+	sy = data->lst_map.y;
 	color = tool_rev(&data->rgb[C]);
-	while (i.y < MAP_Y)
+	while (i.y < MAPY)
 	{
 		i.x = 0;
-		while (i.x < MAP_X)
+		while (i.x < MAPX)
 		{
-			if (data->map[0][i.y * s_y / MAP_Y][i.x * s_x / MAP_X] == '1')
+			if (data->map[0][i.y * sy / MAPY][i.x * sx / MAPX] == '1')
 				data->buf[i_map + i.x] = COLOR_EDGE;
-			else if (check_is_edge(data->map[0][i.y * s_y / MAP_Y][i.x * s_x / MAP_X]))
+			else if (check_edge(data->map[0][i.y * sy / MAPY][i.x * sx / MAPX]))
 				data->buf[i_map + i.x] = color;
 			++i.x;
 		}
@@ -64,20 +66,21 @@ void	draw_map(t_data *data)
 	}
 }
 
-void	draw_vec(t_data *data, float teta, const uint32_t gray, const uint32_t rev)
+void	draw_vec(t_data *data, float teta, const uint32_t gray, \
+const uint32_t rev)
 {
 	uint32_t	dst;
 	t_pointu	j;
 	t_pointu	o;
 	int			i;
 
-	o.y = (uint32_t)(data->plr.pos.y * MAP_Y / data->lst_map.y);
-	o.x = (uint32_t)(data->plr.pos.x * MAP_X / data->lst_map.x);
+	o.y = (uint32_t)(data->plr.pos.y * MAPY / data->lst_map.y);
+	o.x = (uint32_t)(data->plr.pos.x * MAPX / data->lst_map.x);
 	i = 0;
 	j.x = o.x;
 	j.y = o.y;
-	dst = (j.y * WIDTH) + (WIDTH - MAP_X + j.x);
-	while (++i && dst > 0 && j.x < MAP_X && j.y < MAP_Y)
+	dst = (j.y * WIDTH) + (WIDTH - MAPX + j.x);
+	while (++i && dst > 0 && j.x < MAPX && j.y < MAPY)
 	{
 		if ((data->buf[dst] != rev && (data->buf[dst] != gray)) && (i > 3))
 		{
@@ -87,7 +90,7 @@ void	draw_vec(t_data *data, float teta, const uint32_t gray, const uint32_t rev)
 		data->buf[dst] = gray;
 		j.x = o.x + round(i * cos(teta));
 		j.y = o.y + round(i * sin(teta));
-		dst = (j.y * WIDTH) + (WIDTH - MAP_X + j.x);
+		dst = (j.y * WIDTH) + (WIDTH - MAPX + j.x);
 	}
 }
 
@@ -101,17 +104,18 @@ void	draw_player(t_data *data)
 
 	i = -11;
 	while (++i <= 10)
-		draw_vec(data, data->plr.teta - PI42 * i, tool_gray(&data->rgb[C]), tool_rev(&data->rgb[C]));
-	cy = (uint32_t)(data->plr.pos.y * MAP_Y / data->lst_map.y);
-	cx = (uint32_t)(data->plr.pos.x * MAP_X / data->lst_map.x);
+		draw_vec(data, data->plr.teta - PI42 * i, \
+tool_gray(&data->rgb[C]), tool_rev(&data->rgb[C]));
+	cy = (uint32_t)(data->plr.pos.y * MAPY / data->lst_map.y);
+	cx = (uint32_t)(data->plr.pos.x * MAPX / data->lst_map.x);
 	y = -3;
 	while (y <= 3)
 	{
 		x = -3;
 		while (x <= 3)
 		{
-			if ((y + cy) * WIDTH + (WIDTH - MAP_X + cx + x) > 0)
-				data->buf[(y + cy) * WIDTH + (WIDTH - MAP_X + cx + x)] = COLOR_R;
+			if ((y + cy) * WIDTH + (WIDTH - MAPX + cx + x) > 0)
+				data->buf[(y + cy) * WIDTH + (WIDTH - MAPX + cx + x)] = COLOR_R;
 			++x;
 		}
 		++y;

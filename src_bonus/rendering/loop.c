@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaineko <jaineko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 17:04:17 by emrocher          #+#    #+#             */
-/*   Updated: 2025/10/20 18:23:41 by jaineko          ###   ########.fr       */
+/*   Updated: 2025/10/23 15:05:52 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,14 @@ void	loop_door(t_data *data)
 	tick = tool_tick(1);
 	while (tick && ++i.y < max.y)
 	{
-		i.x= 0;
+		i.x = 0;
 		while (++i.x < max.x)
 		{
-			if (tick && data->map[0][i.y][i.x] == 'D' && data->map[1][i.y][i.x] < 144)
+			if (tick && data->map[0][i.y][i.x] == \
+'D' && data->map[1][i.y][i.x] < 144)
 				data->map[1][i.y][i.x] += 8;
-			if (tick && data->map[0][i.y][i.x] == 'C' && data->map[1][i.y][i.x] > 0)
+			if (tick && data->map[0][i.y][i.x] == \
+'C' && data->map[1][i.y][i.x] > 0)
 				data->map[1][i.y][i.x] -= 8;
 		}
 	}

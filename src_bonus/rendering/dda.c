@@ -6,29 +6,11 @@
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 02:40:25 by jaineko           #+#    #+#             */
-/*   Updated: 2025/10/11 20:52:22 by thcaquet         ###   ########.fr       */
+/*   Updated: 2025/10/23 14:49:32 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
-
-void	dda_choose_tex(t_data *data, t_dda *dda)
-{
-	if (dda->side == 0)
-	{
-		if (dda->step.x == 1)
-			dda->tex = &data->tex[WE];
-		else
-			dda->tex = &data->tex[EA];
-	}
-	else
-	{
-		if (dda->step.y == 1)
-			dda->tex = &data->tex[SO];
-		else
-			dda->tex = &data->tex[NO];
-	}
-}
 
 void	dda_init(t_data *data, t_dda *dda, t_point ray_dir)
 {
@@ -68,14 +50,16 @@ void	dda_door(t_data *data, t_dda *dda, t_door *door)
 	if (door->start < 0)
 		door->start = 0;
 	door->end = door->line_height / 2 + HEIGHT / 2;
-	if (dda->side  == 0)
+	if (dda->side == 0)
 		door->wall_x = data->plr.pos.y + door->wall_dist * door->ray_dir.y;
 	else
 		door->wall_x = data->plr.pos.x + door->wall_dist * door->ray_dir.x;
-	door->tex_x = (int)((door->wall_x - floor(door->wall_x)) * door->tex->width);
+	door->tex_x = (int)((door->wall_x - floor(door->wall_x)) \
+* door->tex->width);
 	if (door->tex_x >= door->tex->width)
 		door->tex_x = door->tex->width - 1;
-	if ((!dda->side  && door->ray_dir.x > 0) || (dda->side  && door->ray_dir.y < 0))
+	if ((!dda->side && door->ray_dir.x > 0) || \
+(dda->side && door->ray_dir.y < 0))
 		door->tex_x = door->tex->width - door->tex_x - 1;
 	if (door->line_height <= 0)
 		door->line_height = 1;
